@@ -1,4 +1,5 @@
 from tkinter import *
+from flashcard import FlashDash
 
 class MasterDashboard:
     def on_mousewheel(self, event):
@@ -90,13 +91,19 @@ class MasterDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
+            command = self.start_flashcard
         )
 
         # Bind hover effects to masterButton
         flashDefButton.bind("<Enter>", lambda event: self.on_enter(event, flashDefButton, self.flash_hover))
         flashDefButton.bind("<Leave>", lambda event: self.on_leave(event, flashDefButton, self.flashDef))
 
-        self.flashDefButton_window = self.canvas.create_window(698, 868, anchor=NW, window=flashDefButton)
+        self.flashDefButton_window = self.canvas.create_window(720, 868, anchor=NW, window=flashDefButton)
+
+    def start_flashcard(self):
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+        FlashDash(self.root)
 
 def win():
     root = Tk()
