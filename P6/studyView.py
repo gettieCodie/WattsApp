@@ -1,5 +1,5 @@
 from tkinter import *
-
+from probSet import ProblemSet
 
 class StudyDashboard:
     def on_mousewheel(self, event):
@@ -87,8 +87,14 @@ class StudyDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
+            command=self.open_problemSet
         )
         self.problemButton_window = self.canvas.create_window(1026, 1820, anchor=NW, window=problemButton)
+
+    def open_problemSet(self):
+        for widget in self.root.winfo_children():
+            widget.destroy()
+        ProblemSet(self.root)
 
 def win():
     root = Tk()
