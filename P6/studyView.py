@@ -1,5 +1,6 @@
 from tkinter import *
 from probSet import ProblemSet
+from masterDash import MasterDashboard
 
 class StudyDashboard:
     def on_mousewheel(self, event):
@@ -69,6 +70,7 @@ class StudyDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
+            command=self.open_masterDash
         )
         self.masterButton_window = self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
 
@@ -95,6 +97,11 @@ class StudyDashboard:
         for widget in self.root.winfo_children():
             widget.pack_forget()
         ProblemSet(self.root)
+    
+    def open_masterDash(self):
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+        MasterDashboard(self.root)
 
 def win():
     root = Tk()
