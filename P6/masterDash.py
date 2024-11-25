@@ -1,7 +1,6 @@
 from tkinter import *
-from flashcard import FlashDash
 
-class MasterDashboard:
+class MasterDashboard():
     def on_mousewheel(self, event):
         self.canvas.yview_scroll(-1 * (event.delta // 120), "units")  # Scroll by units
 
@@ -91,7 +90,7 @@ class MasterDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command = self.start_flashcard
+            
         )
 
         # Bind hover effects to masterButton
@@ -100,10 +99,10 @@ class MasterDashboard:
 
         self.flashDefButton_window = self.canvas.create_window(720, 868, anchor=NW, window=flashDefButton)
 
-    def start_flashcard(self):
-        for widget in self.root.winfo_children():
-            widget.pack_forget()
-        FlashDash(self.root)
+    # def start_flashcard(self):
+    #     for widget in self.root.winfo_children():
+    #         widget.pack_forget()
+    #     FlashDash(self.root)
 
 def win():
     root = Tk()

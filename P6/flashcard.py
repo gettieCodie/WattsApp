@@ -60,7 +60,6 @@ class FlashDash():
             widget.pack_forget()
         MasterDashboard(self.root)
 
-
 def win():
     root = Tk()
     FlashDash(root)
