@@ -50,9 +50,17 @@ class ProblemSet:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
+            command=self.go_back
         )
         self.back_Button_window = self.canvas.create_window(414, 35, anchor=NW, window=backButton)
 
+    def go_back(self):
+        from studyView import StudyDashboard
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+
+        StudyDashboard(self.root)
+        
 def win():
     root = Tk()
     ProblemSet(root)

@@ -93,7 +93,7 @@ class StudyDashboard:
 
     def open_problemSet(self):
         for widget in self.root.winfo_children():
-            widget.destroy()
+            widget.pack_forget()
         ProblemSet(self.root)
 
 def win():
