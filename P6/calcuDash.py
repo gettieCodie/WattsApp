@@ -1,6 +1,6 @@
 from tkinter import *
 
-class MasterDashboard():
+class CalcuDashboard():
     def on_mousewheel(self, event):
         self.canvas.yview_scroll(-1 * (event.delta // 120), "units")  # Scroll by units
 
@@ -38,8 +38,8 @@ class MasterDashboard():
             self.tagline = PhotoImage(file="DASH/TAGLINE.png")
             self.know = PhotoImage(file="DASH/know.png")
             self.study = PhotoImage(file="DASH/studyns.png")
-            self.masterSelected = PhotoImage(file="DASH/masterS.png")
-            self.calcu = PhotoImage(file="DASH/calcu.png")
+            self.master = PhotoImage(file="DASH/master.png")
+            self.calcuSelected = PhotoImage(file="DASH/calcuS.png")
             self.flashDef = PhotoImage(file="MASTER/def.png")
             self.flash_hover = PhotoImage(file="MASTER/hover.png")
 
@@ -68,7 +68,7 @@ class MasterDashboard():
         self.studyButton_window = self.canvas.create_window(414, 556, anchor=NW, window=studyButton)
 
         masterButton = Button(
-            root, image=self.masterSelected,
+            root, image=self.master,
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
@@ -77,7 +77,7 @@ class MasterDashboard():
         self.masterButton_window = self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
 
         calcuButton = Button(
-            root, image=self.calcu,
+            root, image=self.calcuSelected,
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
@@ -85,26 +85,6 @@ class MasterDashboard():
         )
         self.calcuButton_window = self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
 
-        flashDefButton = Button(
-            root, image=self.flashDef,
-            borderwidth=0,
-            background="#f4f4f7",
-            activebackground="#f4f4f7",
-            cursor="hand2",
-            command=self.start_flashcard
-        )
-
-        # Bind hover effects to masterButton
-        flashDefButton.bind("<Enter>", lambda event: self.on_enter(event, flashDefButton, self.flash_hover))
-        flashDefButton.bind("<Leave>", lambda event: self.on_leave(event, flashDefButton, self.flashDef))
-
-        self.flashDefButton_window = self.canvas.create_window(720, 868, anchor=NW, window=flashDefButton)
-
-    def start_flashcard(self):
-        from masterFlash import FlashDash
-        for widget in self.root.winfo_children():
-            widget.pack_forget()
-        FlashDash(self.root)
 
     def open_studyDash(self):
         from studyView import StudyDashboard
@@ -114,7 +94,7 @@ class MasterDashboard():
 
 def win():
     root = Tk()
-    MasterDashboard(root)
+    CalcuDashboard(root)
     root.mainloop()
 
 if __name__ == "__main__":
