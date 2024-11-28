@@ -2,7 +2,7 @@ from tkinter import *
 import tkinter as tk
 from masterDash import MasterDashboard
 
-class Power():
+class Work():
     def on_mousewheel(self, event):
         self.canvas.yview_scroll(-1 * (event.delta // 120), "units")  # Scroll by units
 
@@ -29,15 +29,15 @@ class Power():
             self.bg = PhotoImage(file="UTILITY/BGhalf.png")
             self.back = PhotoImage(file="UTILITY/backDash.png")
             self.title = PhotoImage(file="Cpower/what.png")
-            self.powerSel = PhotoImage(file="Cpower/POWER.png")
-            self.work = PhotoImage(file="Cpower/WORK1.png")
+            self.power = PhotoImage(file="Cpower/powerNS.png")
+            self.workSel = PhotoImage(file="Cpower/workS.png")
             self.time = PhotoImage(file="Cpower/time1.png")
             self.solveTable = PhotoImage(file="Cpower/solveTable.png")
-            self.workTXT = PhotoImage(file="Cpower/workTXT.png")
+            self.powerTXT = PhotoImage(file="Cpower/powerTXT.png")
             self.timeTXT = PhotoImage(file="Cpower/timeTXT.png")
-            self.workINPUT = PhotoImage(file="Cpower/workINPUT.png")
+            self.powerINPUT = PhotoImage(file="Cpower/powerINPUT.png")
             self.timeINPUT = PhotoImage(file="Cpower/timeINPUT.png")
-            self.resultPower = PhotoImage(file="Cpower/result.png")
+            self.resultWORK = PhotoImage(file="Cpower/resultWORK.png")
             self.calculate = PhotoImage(file="Cpower/calculate.png")
             self.reset = PhotoImage(file="Cpower/reset.png")
 
@@ -45,11 +45,11 @@ class Power():
             self.canvas_image = self.canvas.create_image(0, 0, anchor=NW, image=self.bg)
             self.titleID = self.canvas.create_image(473, 90, anchor = NW, image = self.title)
             self.solvetableID = self.canvas.create_image(139, 580, anchor=NW, image=self.solveTable)
-            self.workID = self.canvas.create_image(250,651, anchor=NW, image=self.workTXT)
-            self.timeID = self.canvas.create_image(250,725, anchor=NW, image=self.timeTXT)
-            self.workInputID = self.canvas.create_image(435, 645, anchor=NW, image=self.workINPUT)
-            self.timeInputID = self.canvas.create_image(435, 716, anchor=NW, image=self.timeINPUT)
-            self.resultWorkID = self.canvas.create_image(970, 610, anchor=NW, image=self.resultPower)
+            self.timeID = self.canvas.create_image(250,651, anchor=NW, image=self.timeTXT)
+            self.powerID = self.canvas.create_image(250,725, anchor=NW, image=self.powerTXT)
+            self.powerInputID = self.canvas.create_image(435, 716, anchor=NW, image=self.powerINPUT)
+            self.timeInputID = self.canvas.create_image(435, 645, anchor=NW, image=self.timeINPUT)
+            self.resultWorkID = self.canvas.create_image(970, 610, anchor=NW, image=self.resultWORK)
 
             # Create Entry widgets to accept user input
             self.workEntry = tk.Entry(self.root, font=("Arial", 14), bd=0, highlightthickness=0,width=15)
@@ -70,7 +70,7 @@ class Power():
             )
             self.back_Button_window = self.canvas.create_window(149, 70, anchor=NW, window=backButton)
             powerButton = Button(
-            root, image=self.powerSel,
+            root, image=self.power,
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
@@ -94,7 +94,7 @@ class Power():
             )
             self.power_Button_window = self.canvas.create_window(560, 800, anchor=NW, window=resetButton)
             workButton = Button(
-            root, image=self.work,
+            root, image=self.workSel,
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
@@ -126,7 +126,7 @@ class Power():
 
 def win():
     root = Tk()
-    Power(root)
+    Work(root)
     root.mainloop()
 
 if __name__ == "__main__":
