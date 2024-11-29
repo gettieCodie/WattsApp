@@ -1,4 +1,12 @@
 from tkinter import *
+import os
+import sys
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+model_dir = os.path.join(current_dir, "../../MODEL/Power")
+sys.path.append(os.path.normpath(model_dir))
+
+from controller import AppController
 from masterDash import MasterDashboard
 
 class FlashDash():
@@ -16,6 +24,8 @@ class FlashDash():
         self.root = root
         self.root.geometry("1440x1024")
         self.root.title("Watt's App")
+
+        self.controller = AppController(self.root)
 
         # Create a canvas
         self.canvas = Canvas(root, width=1440, height=1024)
@@ -42,33 +52,32 @@ class FlashDash():
             self.canvas_image = self.canvas.create_image(0, 0, anchor=NW, image=self.bg)
             self.cardID = self.canvas.create_image(141,200, anchor = NW, image=self.card)
 
-
             #Buttons
             backButton = Button(
-            root, image=self.back,
-            borderwidth=0,
-            background="#f4f4f7",
-            activebackground="#f4f4f7",
-            cursor="hand2",
-            command=self.back_dash
+                root, image=self.back,
+                borderwidth=0,
+                background="#f4f4f7",
+                activebackground="#f4f4f7",
+                cursor="hand2",
+                command=self.controller.back_masterDash
             )
-            self.back_Button_window = self.canvas.create_window(149, 60, anchor=NW, window=backButton)
+            self.canvas.create_window(149, 60, anchor=NW, window=backButton)
 
             prevButton = Button(
-            root, image=self.prev,
-            borderwidth=0,
-            background="#f4f4f7",
-            activebackground="#f4f4f7",
-            cursor="hand2",
+                root, image=self.prev,
+                borderwidth=0,
+                background="#f4f4f7",
+                activebackground="#f4f4f7",
+                cursor="hand2",
             )
             self.prev_Button_window = self.canvas.create_window(560, 820, anchor=NW, window=prevButton)
 
             forButton = Button(
-            root, image=self.forr,
-            borderwidth=0,
-            background="#f4f4f7",
-            activebackground="#f4f4f7",
-            cursor="hand2",
+                root, image=self.forr,
+                borderwidth=0,
+                background="#f4f4f7",
+                activebackground="#f4f4f7",
+                cursor="hand2",
             )
             self.prev_Button_window = self.canvas.create_window(790, 820, anchor=NW, window=forButton)
 
@@ -78,12 +87,6 @@ class FlashDash():
 
         # Configure the scroll region to match the image height
         self.canvas.config(scrollregion=self.canvas.bbox(ALL))
-
-        
-    def back_dash(self):
-        for widget in self.root.winfo_children():
-            widget.pack_forget()
-        MasterDashboard(self.root)
 
 def win():
     root = Tk()

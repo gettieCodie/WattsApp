@@ -1,6 +1,13 @@
+import os
+import sys
 from tkinter import *
-from probSet import ProblemSet
-from masterDash import MasterDashboard
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+model_dir = os.path.join(current_dir, "../../MODEL/Power")
+sys.path.append(os.path.normpath(model_dir))
+
+from controller import AppController
+
 #
 
 class StudyDashboard:
@@ -11,6 +18,8 @@ class StudyDashboard:
         self.root = root
         self.root.geometry("1440x1024")
         self.root.title("Watt's App")
+
+        self.controller = AppController(self.root)
 
         # Create a canvas
         self.canvas = Canvas(root, width=1440, height=1024)
@@ -63,7 +72,7 @@ class StudyDashboard:
             activebackground="#f4f4f7",
             cursor="hand2",
         )
-        self.studyButton_window = self.canvas.create_window(414, 556, anchor=NW, window=studyButton)
+        self.canvas.create_window(414, 556, anchor=NW, window=studyButton)
 
         masterButton = Button(
             root, image=self.master_img,
@@ -71,9 +80,9 @@ class StudyDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.open_masterDash
+            command=self.controller.open_masterDash
         )
-        self.masterButton_window = self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
+        self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
 
         calcuButton = Button(
             root, image=self.calcu,
@@ -81,9 +90,9 @@ class StudyDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.open_calculator
+            command=self.controller.open_calculator
         )
-        self.calcuButton_window = self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
+        self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
 
         problemButton = Button(
             root, image=self.problem,
@@ -91,25 +100,9 @@ class StudyDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.open_problemSet
+            command=self.controller.open_problemSet
         )
-        self.problemButton_window = self.canvas.create_window(1026, 1820, anchor=NW, window=problemButton)
-
-    def open_problemSet(self):
-        for widget in self.root.winfo_children():
-            widget.pack_forget()
-        ProblemSet(self.root)
-    
-    def open_masterDash(self):
-        for widget in self.root.winfo_children():
-            widget.pack_forget()
-        MasterDashboard(self.root)
-
-    def open_calculator(self):
-        from calcuPower import Power
-        for widget in self.root.winfo_children():
-            widget.pack_forget()
-        Power(self.root)
+        self.canvas.create_window(1026, 1820, anchor=NW, window=problemButton)
 
 def win():
     root = Tk()
