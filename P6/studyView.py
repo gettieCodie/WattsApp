@@ -81,6 +81,7 @@ class StudyDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
+            command=self.open_calculator
         )
         self.calcuButton_window = self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
 
@@ -103,6 +104,12 @@ class StudyDashboard:
         for widget in self.root.winfo_children():
             widget.pack_forget()
         MasterDashboard(self.root)
+
+    def open_calculator(self):
+        from calcuPower import Power
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+        Power(self.root)
 
 def win():
     root = Tk()

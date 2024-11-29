@@ -1,6 +1,6 @@
 from tkinter import *
 import tkinter as tk
-from masterDash import MasterDashboard
+from calcuDash import CalcuDashboard
 
 class Power():
     def on_mousewheel(self, event):
@@ -121,7 +121,7 @@ class Power():
     def back_dash(self):
         for widget in self.root.winfo_children():
             widget.pack_forget()
-        MasterDashboard(self.root)
+        CalcuDashboard(self.root)
 
 
 def win():

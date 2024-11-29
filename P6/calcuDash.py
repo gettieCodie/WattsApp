@@ -1,10 +1,5 @@
 from tkinter import *
-
-
-
-#actually kahit wala neto, ayos lang
-
-
+# from main import ButtonFunctions
 
 class CalcuDashboard():
     def on_mousewheel(self, event):
@@ -88,6 +83,7 @@ class CalcuDashboard():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
+
         )
         self.calcuButton_window = self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
 

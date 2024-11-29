@@ -19,6 +19,7 @@ class Work():
         v_scroll = Scrollbar(root, orient=VERTICAL, command=self.canvas.yview)
         v_scroll.pack(side=RIGHT, fill=Y)
         self.canvas.configure(yscrollcommand=v_scroll.set)
+
         # Bind the mouse wheel to scroll vertically
         self.canvas.bind_all("<MouseWheel>", self.on_mousewheel)
 
@@ -30,14 +31,14 @@ class Work():
             self.back = PhotoImage(file="UTILITY/backDash.png")
             self.title = PhotoImage(file="Cpower/what.png")
             self.power = PhotoImage(file="Cpower/powerNS.png")
-            self.workSel = PhotoImage(file="Cpower/workS.png")
-            self.time = PhotoImage(file="Cpower/time1.png")
+            self.work = PhotoImage(file="Cpower/WORK1.png")
+            self.timeSel = PhotoImage(file="Cpower/time1S.png")
             self.solveTable = PhotoImage(file="Cpower/solveTable.png")
             self.powerTXT = PhotoImage(file="Cpower/powerTXT.png")
-            self.timeTXT = PhotoImage(file="Cpower/timeTXT.png")
+            self.workTXT = PhotoImage(file="Cpower/workTXT.png")
             self.powerINPUT = PhotoImage(file="Cpower/powerINPUT.png")
-            self.timeINPUT = PhotoImage(file="Cpower/timeINPUT.png")
-            self.resultWORK = PhotoImage(file="Cpower/resultWORK.png")
+            self.workInput = PhotoImage(file="Cpower/workINPUT.png")
+            self.resultTIME = PhotoImage(file="Cpower/resultTIME.png")
             self.calculate = PhotoImage(file="Cpower/calculate.png")
             self.reset = PhotoImage(file="Cpower/reset.png")
 
@@ -45,11 +46,11 @@ class Work():
             self.canvas_image = self.canvas.create_image(0, 0, anchor=NW, image=self.bg)
             self.titleID = self.canvas.create_image(473, 90, anchor = NW, image = self.title)
             self.solvetableID = self.canvas.create_image(139, 580, anchor=NW, image=self.solveTable)
-            self.timeID = self.canvas.create_image(250,651, anchor=NW, image=self.timeTXT)
+            self.workID = self.canvas.create_image(250,651, anchor=NW, image=self.workTXT)
             self.powerID = self.canvas.create_image(250,725, anchor=NW, image=self.powerTXT)
             self.powerInputID = self.canvas.create_image(435, 716, anchor=NW, image=self.powerINPUT)
-            self.timeInputID = self.canvas.create_image(435, 645, anchor=NW, image=self.timeINPUT)
-            self.resultWorkID = self.canvas.create_image(970, 610, anchor=NW, image=self.resultWORK)
+            self.workInputID = self.canvas.create_image(435, 645, anchor=NW, image=self.workInput)
+            self.resultTimeID = self.canvas.create_image(970, 610, anchor=NW, image=self.resultTIME)
 
             # Create Entry widgets to accept user input
             self.workEntry = tk.Entry(self.root, font=("Arial", 14), bd=0, highlightthickness=0,width=15)
@@ -66,7 +67,7 @@ class Work():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.back_dash
+            command=self.open_calcuDash
             )
             self.back_Button_window = self.canvas.create_window(149, 70, anchor=NW, window=backButton)
             powerButton = Button(
@@ -94,7 +95,7 @@ class Work():
             )
             self.power_Button_window = self.canvas.create_window(560, 800, anchor=NW, window=resetButton)
             workButton = Button(
-            root, image=self.workSel,
+            root, image=self.work,
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
@@ -102,7 +103,7 @@ class Work():
             )
             self.power_Button_window = self.canvas.create_window(550, 162, anchor=NW, window=workButton)
             timeButton = Button(
-            root, image=self.time,
+            root, image=self.timeSel,
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
@@ -122,6 +123,12 @@ class Work():
         for widget in self.root.winfo_children():
             widget.pack_forget()
         MasterDashboard(self.root)
+
+    def open_calcuDash(self):
+        from calcuDash import CalcuDashboard
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+        CalcuDashboard(self.root)
 
 
 def win():

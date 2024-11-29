@@ -1,5 +1,7 @@
 from tkinter import *
 
+
+
 class MasterDashboard():
     def on_mousewheel(self, event):
         self.canvas.yview_scroll(-1 * (event.delta // 120), "units")  # Scroll by units
@@ -63,7 +65,7 @@ class MasterDashboard():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.open_studyDash
+            command= self.open_studyDash
         )
         self.studyButton_window = self.canvas.create_window(414, 556, anchor=NW, window=studyButton)
 
@@ -82,6 +84,7 @@ class MasterDashboard():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
+            command=self.open_calculator
         )
         self.calcuButton_window = self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
 
@@ -111,6 +114,12 @@ class MasterDashboard():
         for widget in self.root.winfo_children():
             widget.pack_forget()
         StudyDashboard(self.root)
+
+    def open_calculator(self):
+        from calcuPower import Power
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+        Power(self.root)
 
 def win():
     root = Tk()
