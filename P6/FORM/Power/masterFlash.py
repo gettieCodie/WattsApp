@@ -32,13 +32,18 @@ class FlashDash():
         # Load images
         try:
             # Store image references as instance variables
-            self.bg = PhotoImage(file="trace/FCBACK.png")
+            self.bg = PhotoImage(file="UTILITY/BGhalf.png")
             self.back = PhotoImage(file="UTILITY/backDash.png")
-            
+            self.card = PhotoImage(file="FLASH/card.png")
+            self.forr = PhotoImage(file="FLASH/for.png")
+            self.prev = PhotoImage(file="FLASH/prev.png")
 
             # Create images on the canvas
             self.canvas_image = self.canvas.create_image(0, 0, anchor=NW, image=self.bg)
-            
+            self.cardID = self.canvas.create_image(141,200, anchor = NW, image=self.card)
+
+
+            #Buttons
             backButton = Button(
             root, image=self.back,
             borderwidth=0,
@@ -47,7 +52,27 @@ class FlashDash():
             cursor="hand2",
             command=self.back_dash
             )
-            self.back_Button_window = self.canvas.create_window(414, 35, anchor=NW, window=backButton)
+            self.back_Button_window = self.canvas.create_window(149, 60, anchor=NW, window=backButton)
+
+            prevButton = Button(
+            root, image=self.prev,
+            borderwidth=0,
+            background="#f4f4f7",
+            activebackground="#f4f4f7",
+            cursor="hand2",
+            )
+            self.prev_Button_window = self.canvas.create_window(560, 820, anchor=NW, window=prevButton)
+
+            forButton = Button(
+            root, image=self.forr,
+            borderwidth=0,
+            background="#f4f4f7",
+            activebackground="#f4f4f7",
+            cursor="hand2",
+            )
+            self.prev_Button_window = self.canvas.create_window(790, 820, anchor=NW, window=forButton)
+
+
         except Exception as e:
             print(f"Error loading image: {e}")
 

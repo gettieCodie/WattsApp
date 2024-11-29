@@ -1,12 +1,17 @@
 from tkinter import *
-from probSet import ProblemSet
-from masterDash import MasterDashboard
-#
+# from main import ButtonFunctions
 
-class StudyDashboard:
+class CalcuDashboard():
     def on_mousewheel(self, event):
         self.canvas.yview_scroll(-1 * (event.delta // 120), "units")  # Scroll by units
 
+    def on_enter(self, event, button, hover_image):
+        button.config(image=hover_image)
+
+    def on_leave(self, event, button, original_image):
+        button.config(image=original_image)
+    
+    
     def __init__(self, root):
         self.root = root
         self.root.geometry("1440x1024")
@@ -27,17 +32,17 @@ class StudyDashboard:
         # Load images
         try:
             # Store image references as instance variables
-            self.studySelected = PhotoImage(file="DASH/study.png")
-            self.bg = PhotoImage(file="trace/BG.png")
+            self.bg = PhotoImage(file="trace/MASTER.png")
+            self.bg = PhotoImage(file="UTILITY/BGhalf.png")
             self.tab = PhotoImage(file="UTILITY/tab.png")
             self.greeting = PhotoImage(file="DASH/greeting.png")
             self.tagline = PhotoImage(file="DASH/TAGLINE.png")
             self.know = PhotoImage(file="DASH/know.png")
-            self.definitions = PhotoImage(file="DASH/definitions.png")
-            self.formula = PhotoImage(file="DASH/formula.png")
-            self.problem = PhotoImage(file="DASH/problem.png")
-            self.master_img = PhotoImage(file="DASH/master.png")
-            self.calcu = PhotoImage(file="DASH/calcu.png")
+            self.study = PhotoImage(file="DASH/studyns.png")
+            self.master = PhotoImage(file="DASH/master.png")
+            self.calcuSelected = PhotoImage(file="DASH/calcuS.png")
+            self.flashDef = PhotoImage(file="MASTER/def.png")
+            self.flash_hover = PhotoImage(file="MASTER/hover.png")
 
             # Create images on the canvas
             self.canvas_image = self.canvas.create_image(0, 0, anchor=NW, image=self.bg)
@@ -45,10 +50,7 @@ class StudyDashboard:
             self.greetingID = self.canvas.create_image(414, 66, anchor=NW, image=self.greeting)
             self.taglineID = self.canvas.create_image(332, 67, anchor=NW, image=self.tagline)
             self.knowID = self.canvas.create_image(414, 502, anchor=NW, image=self.know)
-            self.definitionsID = self.canvas.create_image(414, 880, anchor=NW, image=self.definitions)
-            self.formulaID = self.canvas.create_image(414, 1508, anchor=NW, image=self.formula)
-            self.problemID = self.canvas.create_image(1026, 1820, anchor=NW, image=self.problem)
-
+            
         except Exception as e:
             print(f"Error loading image: {e}")
 
@@ -57,63 +59,44 @@ class StudyDashboard:
 
         # Create buttons
         studyButton = Button(
-            root, image=self.studySelected,
+            root, image=self.study,
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
+            command=self.open_studyDash
         )
         self.studyButton_window = self.canvas.create_window(414, 556, anchor=NW, window=studyButton)
 
         masterButton = Button(
-            root, image=self.master_img,
+            root, image=self.master,
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.open_masterDash
         )
         self.masterButton_window = self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
 
         calcuButton = Button(
-            root, image=self.calcu,
+            root, image=self.calcuSelected,
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.open_calculator
+
         )
         self.calcuButton_window = self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
 
-        problemButton = Button(
-            root, image=self.problem,
-            borderwidth=0,
-            background="#f4f4f7",
-            activebackground="#f4f4f7",
-            cursor="hand2",
-            command=self.open_problemSet
-        )
-        self.problemButton_window = self.canvas.create_window(1026, 1820, anchor=NW, window=problemButton)
 
-    def open_problemSet(self):
+    def open_studyDash(self):
+        from studyView import StudyDashboard
         for widget in self.root.winfo_children():
             widget.pack_forget()
-        ProblemSet(self.root)
-    
-    def open_masterDash(self):
-        for widget in self.root.winfo_children():
-            widget.pack_forget()
-        MasterDashboard(self.root)
-
-    def open_calculator(self):
-        from calcuPower import Power
-        for widget in self.root.winfo_children():
-            widget.pack_forget()
-        Power(self.root)
+        StudyDashboard(self.root)
 
 def win():
     root = Tk()
-    StudyDashboard(root)
+    CalcuDashboard(root)
     root.mainloop()
 
 if __name__ == "__main__":
