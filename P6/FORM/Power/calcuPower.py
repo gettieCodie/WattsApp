@@ -8,6 +8,7 @@ model_dir = os.path.join(current_dir, "../../MODEL/Power")
 sys.path.append(os.path.normpath(model_dir))
 
 from controller import AppController
+from calculate import CalculatePower
 from calcuDash import CalcuDashboard
 
 class Power():
@@ -64,10 +65,14 @@ class Power():
             # Create Entry widgets to accept user input
             self.workEntry = tk.Entry(self.root, font=("Arial", 14), bd=0, highlightthickness=0,width=15)
             self.timeEntry = tk.Entry(self.root, font=("Arial", 14), bd=0, highlightthickness=0,width=15)
+            self.resultLabel = Label(self.root, font=("Arial", 20), bg="#ffffff", text="")
 
             # Place Entry widgets on the canvas where the images are
             self.workEntry_window = self.canvas.create_window(455, 659, anchor=NW, window=self.workEntry)
             self.timeEntry_window = self.canvas.create_window(455, 729, anchor=NW, window=self.timeEntry)
+            self.resultLabel_window = self.canvas.create_window(1085, 760, anchor=NW, window=self.resultLabel)
+
+            self.calculator = CalculatePower(self.root, self.resultLabel)
 
             #Buttons---------------------------------------
             backButton = Button(
@@ -87,25 +92,31 @@ class Power():
                 activebackground="#f4f4f7",
                 cursor="hand2"
             )
-            self.power_Button_window = self.canvas.create_window(135, 158, anchor=NW, window=powerButton)
+            self.canvas.create_window(135, 158, anchor=NW, window=powerButton)
 
             calculateButton = Button(
                 root, image=self.calculate,
                 borderwidth=0,
                 background="#ffffff",
                 activebackground="#ffffff",
-                cursor="hand2"
+                cursor="hand2",
+                command=lambda: self.calculator.calculate(self.workEntry, self.timeEntry)
             )
-            self.power_Button_window = self.canvas.create_window(435, 800, anchor=NW, window=calculateButton)
+            self.canvas.create_window(435, 800, anchor=NW, window=calculateButton)
 
             resetButton = Button(
                 root, image=self.reset,
                 borderwidth=0,
                 background="#ffffff",
                 activebackground="#ffffff",
-                cursor="hand2"
+                cursor="hand2",
+                command=lambda: [
+                    self.workEntry.delete(0, tk.END),
+                    self.timeEntry.delete(0, tk.END),
+                    self.resultLabel.config(text="")
+                ]
             )
-            self.power_Button_window = self.canvas.create_window(560, 800, anchor=NW, window=resetButton)
+            self.canvas.create_window(560, 800, anchor=NW, window=resetButton)
 
             workButton = Button(
                 root, image=self.work,
