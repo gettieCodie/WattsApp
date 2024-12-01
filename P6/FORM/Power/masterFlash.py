@@ -1,4 +1,5 @@
 from tkinter import *
+import tkinter as tk
 from masterDash import MasterDashboard
 
 class FlashDash():
@@ -18,30 +19,53 @@ class FlashDash():
         self.root.title("Watt's App")
 
         # Create a canvas
-        self.canvas = Canvas(root, width=1440, height=1024)
+        self.canvas = Canvas(root, width=600, height=600)
         self.canvas.pack(side=LEFT, fill=BOTH, expand=True)
-
+            
         # Add a vertical scrollbar
         v_scroll = Scrollbar(root, orient=VERTICAL, command=self.canvas.yview)
         v_scroll.pack(side=RIGHT, fill=Y)
         self.canvas.configure(yscrollcommand=v_scroll.set)
 
-        # Bind the mouse wheel to scroll vertically
-        self.canvas.bind_all("<MouseWheel>", self.on_mousewheel)
+            # Bind the mouse wheel to scroll vertically
+        self.canvas.bind_all("<MouseWheel>", self.on_mousewheel)        
 
         # Load images
         try:
             # Store image references as instance variables
             self.bg = PhotoImage(file="UTILITY/BGhalf.png")
             self.back = PhotoImage(file="UTILITY/backDash.png")
-            self.card = PhotoImage(file="FLASH/card.png")
             self.forr = PhotoImage(file="FLASH/for.png")
             self.prev = PhotoImage(file="FLASH/prev.png")
+            self.current_card = 0
+            self.is_front = True
+            self.flashcards = [
+                    ("FLASH/POWER/Definitions/DPower 1.png", "FLASH/POWER/Terms/TPower 1.png"),
+                    ("FLASH/POWER/Definitions/DPower 2.png", "FLASH/POWER/Terms/TPower 2.png"),
+                    ("FLASH/POWER/Definitions/DPower 3.png", "FLASH/POWER/Terms/TPower 3.png"),
+                    ("FLASH/POWER/Definitions/DPower 4.png", "FLASH/POWER/Terms/TPower 4.png"),
+                    ("FLASH/POWER/Definitions/DPower 5.png", "FLASH/POWER/Terms/TPower 5.png"),
+                    ("FLASH/POWER/Definitions/DPower 6.png", "FLASH/POWER/Terms/TPower 6.png"),
+                    ("FLASH/POWER/Definitions/DPower 7.png", "FLASH/POWER/Terms/TPower 7.png"),
+                    ("FLASH/POWER/Definitions/DPower 8.png", "FLASH/POWER/Terms/TPower 8.png"),
+                    ("FLASH/POWER/Definitions/DPower 9.png", "FLASH/POWER/Terms/TPower 9.png"),
+                    ("FLASH/POWER/Definitions/DPower 10.png", "FLASH/POWER/Terms/TPower 10.png")
+            ]
+            self.front_image = PhotoImage(file=self.flashcards[self.current_card][0])
+            self.back_image = PhotoImage(file=self.flashcards[self.current_card][1])
 
             # Create images on the canvas
             self.canvas_image = self.canvas.create_image(0, 0, anchor=NW, image=self.bg)
-            self.cardID = self.canvas.create_image(141,200, anchor = NW, image=self.card)
-
+            
+            # Flashcards as label 
+            self.card_label = Label(
+            root, image=self.front_image,
+            width=1220,
+            height=670
+            )
+            self.card_label.bind("<Button-1>", self.flip_card)
+            self.card_window = self.canvas.create_window(120, 180, anchor=NW, window=self.card_label)
+            
 
             #Buttons
             backButton = Button(
@@ -52,7 +76,7 @@ class FlashDash():
             cursor="hand2",
             command=self.back_dash
             )
-            self.back_Button_window = self.canvas.create_window(149, 60, anchor=NW, window=backButton)
+            self.back_Button_window = self.canvas.create_window(100, 100, anchor=NW, window=backButton)
 
             prevButton = Button(
             root, image=self.prev,
@@ -60,6 +84,7 @@ class FlashDash():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
+            command=self.prev_card
             )
             self.prev_Button_window = self.canvas.create_window(560, 820, anchor=NW, window=prevButton)
 
@@ -69,9 +94,11 @@ class FlashDash():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
+            command=self.next_card
             )
             self.prev_Button_window = self.canvas.create_window(790, 820, anchor=NW, window=forButton)
 
+            
 
         except Exception as e:
             print(f"Error loading image: {e}")
@@ -84,6 +111,36 @@ class FlashDash():
         for widget in self.root.winfo_children():
             widget.pack_forget()
         MasterDashboard(self.root)
+
+    def flip_card(self, event):
+        self._flip(0)
+    
+    def _flip(self, step):
+        steps = 10  
+        if step < steps:
+            if step < steps / 2:
+                self.card_label.config(image=self.front_image if self.is_front else self.back_image)
+            else:
+                self.card_label.config(image=self.back_image if self.is_front else self.front_image)
+            self.root.after(50, self._flip, step + 1)
+        else:
+            self.is_front = not self.is_front
+
+    def next_card(self):
+        self.current_card = (self.current_card + 1) % len(self.flashcards)
+        self.is_front = True
+        
+        self.front_image = PhotoImage(file=self.flashcards[self.current_card][0])
+        self.back_image = PhotoImage(file=self.flashcards[self.current_card][1])
+        self.card_label.config(image=self.front_image)
+    
+    def prev_card(self):
+        self.current_card = (self.current_card - 1) % len(self.flashcards)
+        self.is_front = True
+        
+        self.front_image = PhotoImage(file=self.flashcards[self.current_card][0])
+        self.back_image = PhotoImage(file=self.flashcards[self.current_card][1])
+        self.card_label.config(image=self.front_image)
 
 def win():
     root = Tk()
