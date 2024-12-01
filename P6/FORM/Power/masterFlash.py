@@ -1,5 +1,4 @@
 from tkinter import *
-import tkinter as tk
 from masterDash import MasterDashboard
 
 class FlashDash():
@@ -27,7 +26,7 @@ class FlashDash():
         v_scroll.pack(side=RIGHT, fill=Y)
         self.canvas.configure(yscrollcommand=v_scroll.set)
 
-            # Bind the mouse wheel to scroll vertically
+        # Bind the mouse wheel to scroll vertically
         self.canvas.bind_all("<MouseWheel>", self.on_mousewheel)        
 
         # Load images
@@ -141,7 +140,6 @@ class FlashDash():
         self.front_image = PhotoImage(file=self.flashcards[self.current_card][0])
         self.back_image = PhotoImage(file=self.flashcards[self.current_card][1])
         self.card_label.config(image=self.front_image)
-        #gaga
 
 def win():
     root = Tk()
