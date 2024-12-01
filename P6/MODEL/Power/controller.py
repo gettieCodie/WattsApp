@@ -1,4 +1,6 @@
 from backend import *
+from calculatePow import CalculatePower
+
 class AppController:
     def __init__(self, root):
         self.root = root
@@ -32,3 +34,4 @@ class AppController:
 
     def start_flashCard(self):
         FlashCards.launch(self.root)
+    

@@ -41,10 +41,10 @@ class Calculator:
         Work(root)
     
     def launchTime(root):
-        from calcuTime import Work
+        from calcuTime import Time
         for widget in root.winfo_children():
             widget.pack_forget()
-        Work(root)
+        Time(root)
 
     def back(root):
         from calcuDash import CalcuDashboard
