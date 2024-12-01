@@ -141,6 +141,7 @@ class FlashDash():
         self.front_image = PhotoImage(file=self.flashcards[self.current_card][0])
         self.back_image = PhotoImage(file=self.flashcards[self.current_card][1])
         self.card_label.config(image=self.front_image)
+        #gaga
 
 def win():
     root = Tk()

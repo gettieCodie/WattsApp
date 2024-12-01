@@ -1,4 +1,12 @@
 from tkinter import *
+import os
+import sys
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+model_dir = os.path.join(current_dir, "../../MODEL/Power")
+sys.path.append(os.path.normpath(model_dir))
+
+from controller import AppController
 
 class ProblemSet:
     def on_mousewheel(self, event):
@@ -8,6 +16,8 @@ class ProblemSet:
         self.root = root
         self.root.geometry("1440x1024")
         self.root.title("Watt's App")
+
+        self.controller = AppController(self.root)
 
         # Create a canvas
         self.canvas = Canvas(root, width=1440, height=1024)
@@ -50,16 +60,9 @@ class ProblemSet:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.go_back
+            command=self.controller.back_studyDash
         )
-        self.back_Button_window = self.canvas.create_window(414, 35, anchor=NW, window=backButton)
-
-    def go_back(self):
-        from studyView import StudyDashboard
-        for widget in self.root.winfo_children():
-            widget.pack_forget()
-
-        StudyDashboard(self.root)
+        self.canvas.create_window(414, 35, anchor=NW, window=backButton)
         
 def win():
     root = Tk()

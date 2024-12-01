@@ -1,4 +1,12 @@
 from tkinter import *
+import os
+import sys
+current_dir = os.path.dirname(os.path.abspath(__file__))
+model_dir = os.path.join(current_dir, "../../MODEL/Power")
+sys.path.append(os.path.normpath(model_dir))
+
+from controller import AppController
+
 # from main import ButtonFunctions
 
 class CalcuDashboard():
@@ -16,6 +24,8 @@ class CalcuDashboard():
         self.root = root
         self.root.geometry("1440x1024")
         self.root.title("Watt's App")
+
+        self.controller = AppController(self.root)
 
         # Create a canvas
         self.canvas = Canvas(root, width=1440, height=1024)
@@ -64,9 +74,9 @@ class CalcuDashboard():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.open_studyDash
+            command=self.controller.open_studyDash
         )
-        self.studyButton_window = self.canvas.create_window(414, 556, anchor=NW, window=studyButton)
+        self.canvas.create_window(414, 556, anchor=NW, window=studyButton)
 
         masterButton = Button(
             root, image=self.master,
@@ -74,8 +84,9 @@ class CalcuDashboard():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
+            command=self.controller.open_masterDash
         )
-        self.masterButton_window = self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
+        self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
 
         calcuButton = Button(
             root, image=self.calcuSelected,
@@ -83,16 +94,10 @@ class CalcuDashboard():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
+            command=self.controller.open_calculator
 
         )
-        self.calcuButton_window = self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
-
-
-    def open_studyDash(self):
-        from studyView import StudyDashboard
-        for widget in self.root.winfo_children():
-            widget.pack_forget()
-        StudyDashboard(self.root)
+        self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
 
 def win():
     root = Tk()

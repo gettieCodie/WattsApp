@@ -1,5 +1,13 @@
 from tkinter import *
 import tkinter as tk
+import os
+import sys
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+model_dir = os.path.join(current_dir, "../../MODEL/Power")
+sys.path.append(os.path.normpath(model_dir))
+
+from controller import AppController
 from calcuDash import CalcuDashboard
 
 class Power():
@@ -10,6 +18,8 @@ class Power():
         self.root = root
         self.root.geometry("1440x1024")
         self.root.title("Watt's App")
+
+        self.controller = AppController(self.root)
 
         # Create a canvas
         self.canvas = Canvas(root, width=1440, height=1024)
@@ -61,68 +71,67 @@ class Power():
 
             #Buttons---------------------------------------
             backButton = Button(
-            root, image=self.back,
-            borderwidth=0,
-            background="#f4f4f7",
-            activebackground="#f4f4f7",
-            cursor="hand2",
-            command=self.back_dash
+                root, image=self.back,
+                borderwidth=0,
+                background="#f4f4f7",
+                activebackground="#f4f4f7",
+                cursor="hand2",
+                command=self.controller.back_calcuDash
             )
-            self.back_Button_window = self.canvas.create_window(149, 70, anchor=NW, window=backButton)
+            self.canvas.create_window(149, 70, anchor=NW, window=backButton)
+
             powerButton = Button(
-            root, image=self.powerSel,
-            borderwidth=0,
-            background="#f4f4f7",
-            activebackground="#f4f4f7",
-            cursor="hand2"
+                root, image=self.powerSel,
+                borderwidth=0,
+                background="#f4f4f7",
+                activebackground="#f4f4f7",
+                cursor="hand2"
             )
             self.power_Button_window = self.canvas.create_window(135, 158, anchor=NW, window=powerButton)
+
             calculateButton = Button(
-            root, image=self.calculate,
-            borderwidth=0,
-            background="#ffffff",
-            activebackground="#ffffff",
-            cursor="hand2"
+                root, image=self.calculate,
+                borderwidth=0,
+                background="#ffffff",
+                activebackground="#ffffff",
+                cursor="hand2"
             )
             self.power_Button_window = self.canvas.create_window(435, 800, anchor=NW, window=calculateButton)
+
             resetButton = Button(
-            root, image=self.reset,
-            borderwidth=0,
-            background="#ffffff",
-            activebackground="#ffffff",
-            cursor="hand2"
+                root, image=self.reset,
+                borderwidth=0,
+                background="#ffffff",
+                activebackground="#ffffff",
+                cursor="hand2"
             )
             self.power_Button_window = self.canvas.create_window(560, 800, anchor=NW, window=resetButton)
+
             workButton = Button(
-            root, image=self.work,
-            borderwidth=0,
-            background="#f4f4f7",
-            activebackground="#f4f4f7",
-            cursor="hand2"
+                root, image=self.work,
+                borderwidth=0,
+                background="#f4f4f7",
+                activebackground="#f4f4f7",
+                cursor="hand2",
+                command=self.controller.open_calcuWork
             )
-            self.power_Button_window = self.canvas.create_window(550, 162, anchor=NW, window=workButton)
+            self.canvas.create_window(550, 162, anchor=NW, window=workButton)
+
             timeButton = Button(
-            root, image=self.time,
-            borderwidth=0,
-            background="#f4f4f7",
-            activebackground="#f4f4f7",
-            cursor="hand2"
+                root, image=self.time,
+                borderwidth=0,
+                background="#f4f4f7",
+                activebackground="#f4f4f7",
+                cursor="hand2",
+                command=self.controller.open_calcuTime
             )
-            self.power_Button_window = self.canvas.create_window(960, 162, anchor=NW, window=timeButton)
+            self.canvas.create_window(960, 162, anchor=NW, window=timeButton)
 
         except Exception as e:
             print(f"Error loading image: {e}")
 
         # Configure the scroll region to match the image height
         self.canvas.config(scrollregion=self.canvas.bbox(ALL))
-
-
-    #Button Functions
-    def back_dash(self):
-        for widget in self.root.winfo_children():
-            widget.pack_forget()
-        CalcuDashboard(self.root)
-
 
 def win():
     root = Tk()
