@@ -118,9 +118,9 @@ class FlashDash():
         steps = 10  
         if step < steps:
             if step < steps / 2:
-                self.card_label.config(image=self.front_image if self.is_front else self.back_image)
+                self.card_label.config(image=self.front_image if self.is_front else self.back_image, bg = "#f4f4f7")
             else:
-                self.card_label.config(image=self.back_image if self.is_front else self.front_image)
+                self.card_label.config(image=self.back_image if self.is_front else self.front_image, bg = "#f4f4f7")
             self.root.after(50, self._flip, step + 1)
         else:
             self.is_front = not self.is_front
