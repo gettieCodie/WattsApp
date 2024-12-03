@@ -60,7 +60,10 @@ class FlashDash():
             self.card_label = Label(
             root, image=self.front_image,
             width=1220,
-            height=670
+            height=670,
+            bg="#f4f4f7",  # Set the background color
+            highlightthickness=0  # Remove border
+
             )
             self.card_label.bind("<Button-1>", self.flip_card)
             self.card_window = self.canvas.create_window(120, 180, anchor=NW, window=self.card_label)
@@ -118,12 +121,18 @@ class FlashDash():
         steps = 10  
         if step < steps:
             if step < steps / 2:
-                self.card_label.config(image=self.front_image if self.is_front else self.back_image)
+                self.card_label.config(image=self.front_image if self.is_front else self.back_image, bg = "#f4f4f7")
             else:
-                self.card_label.config(image=self.back_image if self.is_front else self.front_image)
+                self.card_label.config(image=self.back_image if self.is_front else self.front_image, bg = "#f4f4f7")
             self.root.after(50, self._flip, step + 1)
         else:
             self.is_front = not self.is_front
+
+            if self.is_front:
+                self.card_label.config(bg="f4f4f7")  # Front side color
+            else:
+                self.card_label.config(bg="f4f4f7")  # Back side color
+
 
     def next_card(self):
         self.current_card = (self.current_card + 1) % len(self.flashcards)
@@ -132,6 +141,8 @@ class FlashDash():
         self.front_image = PhotoImage(file=self.flashcards[self.current_card][0])
         self.back_image = PhotoImage(file=self.flashcards[self.current_card][1])
         self.card_label.config(image=self.front_image)
+
+        self.card_label.config(image=self.front_image, bg="#f4f4f7")
     
     def prev_card(self):
         self.current_card = (self.current_card - 1) % len(self.flashcards)
@@ -140,6 +151,8 @@ class FlashDash():
         self.front_image = PhotoImage(file=self.flashcards[self.current_card][0])
         self.back_image = PhotoImage(file=self.flashcards[self.current_card][1])
         self.card_label.config(image=self.front_image)
+
+        self.card_label.config(image=self.front_image, bg="#f4f4f7")
 
 def win():
     root = Tk()
