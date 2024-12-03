@@ -50,6 +50,6 @@ class CalculateTime:
             time = work / power
             self.result_label.config(text=f"{time:.2f} s")  # Update result label
         except ValueError:
-            messagebox.showerror("Invalid Input", "Please enter numeric values for Work and Time.")
+            messagebox.showerror("Invalid Input", "Please enter numeric values for Work and Power.")
         except ZeroDivisionError as e:
             messagebox.showerror("Error", str(e))
