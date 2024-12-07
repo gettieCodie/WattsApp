@@ -4,7 +4,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(current_dir, "Energy"))
 from tkinter import messagebox
 
-class CalculatePower:
+class CalculateEnergy:
     def __init__(self, root, result_label):
         self.root = root
         self.result_label = result_label
