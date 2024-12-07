@@ -1,25 +1,18 @@
-from tkinter import *
 import os
 import sys
+from tkinter import *
+
 current_dir = os.path.dirname(os.path.abspath(__file__))
-model_dir = os.path.join(current_dir, "../../MODEL/Energy")
+model_dir = os.path.join(current_dir, "../../MODEL/Work")
 sys.path.append(os.path.normpath(model_dir))
 
 from controller import AppController
 
-# from main import ButtonFunctions
 
-class CalcuDashboard():
+class EnergyStudyDashboard:
     def on_mousewheel(self, event):
         self.canvas.yview_scroll(-1 * (event.delta // 120), "units")  # Scroll by units
 
-    def on_enter(self, event, button, hover_image):
-        button.config(image=hover_image)
-
-    def on_leave(self, event, button, original_image):
-        button.config(image=original_image)
-    
-    
     def __init__(self, root):
         self.root = root
         self.root.geometry("1440x1024")
@@ -42,16 +35,17 @@ class CalcuDashboard():
         # Load images
         try:
             # Store image references as instance variables
-            self.bg = PhotoImage(file="trace/MASTER.png")
-            self.bg = PhotoImage(file="UTILITY/BGhalf.png")
+            self.studySelected = PhotoImage(file="AssetsEnergy/studyS.png")
+            self.bg = PhotoImage(file="trace/BG.png")
             self.tab = PhotoImage(file="UTILITY/tab.png")
-            self.greeting = PhotoImage(file="DASH/GREETING.png")
-            self.tagline = PhotoImage(file="DASH/TAGLINE.png")
-            self.know = PhotoImage(file="DASH/know.png")
-            self.study = PhotoImage(file="DASH/studyns.png")
-            self.master = PhotoImage(file="AssetsEnergy/master.png")
-            self.calcuSelected = PhotoImage(file="DASH/calcuS.png")
-
+            self.greeting = PhotoImage(file="AssetsEnergy/greeting.png")
+            self.tagline = PhotoImage(file="AssetsEnergy/tagline.png")
+            self.know = PhotoImage(file="AssetsEnergy/kmPower.png")
+            self.definitions = PhotoImage(file="AssetsEnergy/definitions.png")
+            self.formula = PhotoImage(file="AssetsEnergy/formula.png")
+            self.problem = PhotoImage(file="AssetsEnergy/probButton.png")
+            self.master_img = PhotoImage(file="AssetsEnergy/master.png")
+            self.calcu = PhotoImage(file="AssetsEnergy/calcu.png")
 
             # Create images on the canvas
             self.canvas_image = self.canvas.create_image(0, 0, anchor=NW, image=self.bg)
@@ -59,7 +53,10 @@ class CalcuDashboard():
             self.greetingID = self.canvas.create_image(414, 66, anchor=NW, image=self.greeting)
             self.taglineID = self.canvas.create_image(332, 67, anchor=NW, image=self.tagline)
             self.knowID = self.canvas.create_image(414, 502, anchor=NW, image=self.know)
-            
+            self.definitionsID = self.canvas.create_image(414, 880, anchor=NW, image=self.definitions)
+            self.formulaID = self.canvas.create_image(414, 1508, anchor=NW, image=self.formula)
+            # self.problemID = self.canvas.create_image(1026, 1820, anchor=NW, image=self.problem)
+
         except Exception as e:
             print(f"Error loading image: {e}")
 
@@ -68,17 +65,16 @@ class CalcuDashboard():
 
         # Create buttons
         studyButton = Button(
-            root, image=self.study,
+            root, image=self.studySelected,
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_studyDash
         )
         self.canvas.create_window(414, 556, anchor=NW, window=studyButton)
 
         masterButton = Button(
-            root, image=self.master,
+            root, image=self.master_img,
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
@@ -88,19 +84,28 @@ class CalcuDashboard():
         self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
 
         calcuButton = Button(
-            root, image=self.calcuSelected,
+            root, image=self.calcu,
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
             command=self.controller.open_calculator
-
         )
         self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
 
+        problemButton = Button(
+            root, image=self.problem,
+            borderwidth=0,
+            background="#f4f4f7",
+            activebackground="#f4f4f7",
+            cursor="hand2",
+            command=self.controller.open_problemSet
+        )
+        self.canvas.create_window(1026, 1905, anchor=NW, window=problemButton)
+
 def win():
     root = Tk()
-    CalcuDashboard(root)
+    EnergyStudyDashboard(root)
     root.mainloop()
 
 if __name__ == "__main__":

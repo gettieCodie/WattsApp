@@ -2,7 +2,7 @@ from tkinter import *
 import os
 import sys
 current_dir = os.path.dirname(os.path.abspath(__file__))
-model_dir = os.path.join(current_dir, "../../MODEL/Energy")
+model_dir = os.path.join(current_dir, "../../MODEL/Work")
 sys.path.append(os.path.normpath(model_dir))
 
 from controller import AppController
@@ -45,12 +45,12 @@ class CalcuDashboard():
             self.bg = PhotoImage(file="trace/MASTER.png")
             self.bg = PhotoImage(file="UTILITY/BGhalf.png")
             self.tab = PhotoImage(file="UTILITY/tab.png")
-            self.greeting = PhotoImage(file="DASH/GREETING.png")
-            self.tagline = PhotoImage(file="DASH/TAGLINE.png")
-            self.know = PhotoImage(file="DASH/know.png")
-            self.study = PhotoImage(file="DASH/studyns.png")
+            self.greeting = PhotoImage(file="AssetsEnergy/greeting.png")
+            self.tagline = PhotoImage(file="AssetsEnergy/TAGLINE.png")
+            self.know = PhotoImage(file="AssetsEnergy/kmPower.png")
+            self.study = PhotoImage(file="AssetsEnergy/study.png")
             self.master = PhotoImage(file="AssetsEnergy/master.png")
-            self.calcuSelected = PhotoImage(file="DASH/calcuS.png")
+            self.calcuSelected = PhotoImage(file="AssetsEnergy/calcuS.png")
 
 
             # Create images on the canvas
