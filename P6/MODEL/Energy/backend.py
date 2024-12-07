@@ -1,10 +1,10 @@
 import os
 import sys
 current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(current_dir, "Power"))
+sys.path.insert(0, os.path.join(current_dir, "Energy"))
 
 
-class Problem_Set:
+class Energy_Set:
     @staticmethod
     def launch(root):
         from probSet import ProblemSet
@@ -28,11 +28,11 @@ class Master_Dashboard:
 
 class Calculator:
     @staticmethod
-    def launchPower(root):
-        from calcuPower import Power
+    def launchWork(root):
+        from calcuWork import Work
         for widget in root.winfo_children():
             widget.pack_forget()
-        Power(root)
+        Work(root)
 
     def launchWork(root):
         from calcuWork import Work
