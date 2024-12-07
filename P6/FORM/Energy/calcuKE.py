@@ -8,7 +8,7 @@ model_dir = os.path.join(current_dir, "../../MODEL/Energy")
 sys.path.append(os.path.normpath(model_dir))
 
 from controller import AppController
-from calculate import CalculateWork
+from calculate import CalculateKineticEnergy
 from masterDash import MasterDashboard
 
 class Work():
@@ -69,7 +69,7 @@ class Work():
             self.massEntry_window = self.canvas.create_window(455, 729, anchor=NW, window=self.massEntry)
             self.resultLabel_window = self.canvas.create_window(1085, 760, anchor=NW, window=self.resultLabel)
 
-            self.calculator = CalculateWork(self.root, self.resultLabel)
+            self.calculator = CalculateKineticEnergy(self.root, self.resultLabel)
 
             #Buttons---------------------------------------
             backButton = Button(
@@ -98,7 +98,7 @@ class Work():
                 background="#ffffff",
                 activebackground="#ffffff",
                 cursor="hand2",
-                command=lambda: self.calculator.calculate(self.powerEntry, self.timeEntry)
+                command=lambda: self.calculator.calculate(self.massEntry, self.velocityEntry)
             )
             self.canvas.create_window(435, 800, anchor=NW, window=calculateButton)
 
@@ -109,8 +109,8 @@ class Work():
                 activebackground="#ffffff",
                 cursor="hand2",
                 command=lambda: [
-                    self.powerEntry.delete(0, tk.END),
-                    self.timeEntry.delete(0, tk.END),
+                    self.velocityEntry.delete(0, tk.END),
+                    self.massEntry.delete(0, tk.END),
                     self.resultLabel.config(text="")
                 ]
             )

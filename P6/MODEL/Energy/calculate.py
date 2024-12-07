@@ -13,13 +13,12 @@ class CalculatePotentialEnergy:
         try:
             height = float(height.get())
             mass = float(mass.get())
-            
-            PE = mass  * 9.81 * height
+
+            PE = mass  * 9.8 * height
             self.result_label.config(text=f"{PE:.2f} J")  # Update result label
         except ValueError:
-            messagebox.showerror("Invalid Input", "Please enter numeric values for Work and Time.")
-        except ZeroDivisionError as e:
-            messagebox.showerror("Error", str(e))
+            messagebox.showerror("Invalid Input", "Please enter numeric values for mass and height.")
+
 
 class CalculateKineticEnergy:
     def __init__(self, root, result_label):
@@ -30,10 +29,10 @@ class CalculateKineticEnergy:
         try:
             mass = float(mass.get())
             velocity = float(velocity.get())
-            KE = 0.5 * mass * (velocity**2)
+            KE =  0.5 * mass * velocity ** 2
             self.result_label.config(text=f"{KE:.2f} J")  # Update result label
         except ValueError:
-            messagebox.showerror("Invalid Input", "Please enter numeric values for Power and Time.")
+            messagebox.showerror("Invalid Input", "Please enter numeric values for mass and velocity.")
 
 class CalculateTime:
     def __init__(self, root, result_label):
