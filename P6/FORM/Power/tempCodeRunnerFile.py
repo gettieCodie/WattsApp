@@ -1,8 +1,11 @@
-import os
-import sys
-
-current_dir = os.path.dirname(os.path.abspath(__file__))
-model_dir = os.path.join(current_dir, "../../MODEL/Power")
-sys.path.append(os.path.normpath(model_dir))
-
-from controller import AppController
+self.bg = PhotoImage(file="trace/MASTER.png")
+            self.bg = PhotoImage(file="UTILITY/BGhalf.png")
+            self.tab = PhotoImage(file="UTILITY/tab.png")
+            self.greeting = PhotoImage(file="DASH/greeting.png")
+            self.tagline = PhotoImage(file="DASH/TAGLINE.png")
+            self.know = PhotoImage(file="DASH/know.png")
+            self.study = PhotoImage(file="DASH/studyns.png")
+            self.master = PhotoImage(file="DASH/master.png")
+            self.calcuSelected = PhotoImage(file="DASH/calcuS.png")
+            self.flashDef = PhotoImage(file="MASTER/def.png")
+            self.flash_hover = PhotoImage(file="MASTER/hover.png")

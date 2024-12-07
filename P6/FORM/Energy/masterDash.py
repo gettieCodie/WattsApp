@@ -1,15 +1,15 @@
 from tkinter import *
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.abspath(__file__))
 model_dir = os.path.join(current_dir, "../../MODEL/Energy")
 sys.path.append(os.path.normpath(model_dir))
 
 from controller import AppController
 
-# from main import ButtonFunctions
 
-class CalcuDashboard():
+class MasterDashboard():
     def on_mousewheel(self, event):
         self.canvas.yview_scroll(-1 * (event.delta // 120), "units")  # Scroll by units
 
@@ -28,7 +28,7 @@ class CalcuDashboard():
         self.controller = AppController(self.root)
 
         # Create a canvas
-        self.canvas = Canvas(root, width=1440, height=1024, bg = "#f4f4f7")
+        self.canvas = Canvas(root, width=1440, height=1024)
         self.canvas.pack(side=LEFT, fill=BOTH, expand=True)
 
         # Add a vertical scrollbar
@@ -46,12 +46,13 @@ class CalcuDashboard():
             self.bg = PhotoImage(file="UTILITY/BGhalf.png")
             self.tab = PhotoImage(file="UTILITY/tab.png")
             self.greeting = PhotoImage(file="AssetsEnergy/greeting.png")
-            self.tagline = PhotoImage(file="AssetsEnergy/TAGLINE.png")
+            self.tagline = PhotoImage(file="AssetsEnergy/tagline.png")
             self.know = PhotoImage(file="AssetsEnergy/kmPower.png")
             self.study = PhotoImage(file="AssetsEnergy/study.png")
-            self.master = PhotoImage(file="AssetsEnergy/master.png")
-            self.calcuSelected = PhotoImage(file="AssetsEnergy/calcuS.png")
-
+            self.masterSelected = PhotoImage(file="AssetsEnergy/masterS.png")
+            self.calcu = PhotoImage(file="AssetsEnergy/calcu.png")
+            self.flashDef = PhotoImage(file="AssetsEnergy/def.png")
+            self.flash_hover = PhotoImage(file="AssetsEnergy/hover.png")
 
             # Create images on the canvas
             self.canvas_image = self.canvas.create_image(0, 0, anchor=NW, image=self.bg)
@@ -73,34 +74,47 @@ class CalcuDashboard():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_studyDash
+            command= self.controller.open_studyDash
         )
         self.canvas.create_window(414, 556, anchor=NW, window=studyButton)
 
         masterButton = Button(
-            root, image=self.master,
+            root, image=self.masterSelected,
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_masterDash
         )
-        self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
+        self.masterButton_window = self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
 
         calcuButton = Button(
-            root, image=self.calcuSelected,
+            root, image=self.calcu,
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
             command=self.controller.open_calculator
-
         )
         self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
 
+        flashDefButton = Button(
+            root, image=self.flashDef,
+            borderwidth=0,
+            background="#f4f4f7",
+            activebackground="#f4f4f7",
+            cursor="hand2",
+            command=self.controller.start_flashCard
+        )
+
+        # Bind hover effects to masterButton
+        flashDefButton.bind("<Enter>", lambda event: self.on_enter(event, flashDefButton, self.flash_hover))
+        flashDefButton.bind("<Leave>", lambda event: self.on_leave(event, flashDefButton, self.flashDef))
+
+        self.flashDefButton_window = self.canvas.create_window(710, 868, anchor=NW, window=flashDefButton)
+
 def win():
     root = Tk()
-    CalcuDashboard(root)
+    MasterDashboard(root)
     root.mainloop()
 
 if __name__ == "__main__":
