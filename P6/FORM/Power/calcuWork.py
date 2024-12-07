@@ -65,12 +65,12 @@ class Work():
             # Create Entry widgets to accept user input
             self.powerEntry = tk.Entry(self.root, font=("Arial", 14), bd=0, highlightthickness=0,width=15)
             self.timeEntry = tk.Entry(self.root, font=("Arial", 14), bd=0, highlightthickness=0,width=15)
-            self.resultLabel = Label(self.root, font=("Arial", 20), bg="#ffffff", text="")
+            self.resultLabel = Label(self.root, font=("Arial", 27), bg="#fff6de", text="")
 
             # Place Entry widgets on the canvas where the images are
             self.powerEntry_window = self.canvas.create_window(455, 659, anchor=NW, window=self.powerEntry)
             self.timeEntry_window = self.canvas.create_window(455, 729, anchor=NW, window=self.timeEntry)
-            self.resultLabel_window = self.canvas.create_window(1085, 760, anchor=NW, window=self.resultLabel)
+            self.resultLabel_window = self.canvas.create_window(1073, 765, anchor=NW, window=self.resultLabel)
 
             self.calculator = CalculateWork(self.root, self.resultLabel)
 
