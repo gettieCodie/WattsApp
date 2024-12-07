@@ -8,7 +8,7 @@ model_dir = os.path.join(current_dir, "../../MODEL/Energy")
 sys.path.append(os.path.normpath(model_dir))
 
 from controller import AppController
-from calculate import CalculateWork
+from calculate import CalculateKineticEnergy
 from masterDash import MasterDashboard
 
 class Work():
@@ -60,16 +60,16 @@ class Work():
             self.resultWorkID = self.canvas.create_image(970, 610, anchor=NW, image=self.resultWORK)
 
             # Create Entry widgets to accept user input
-            self.powerEntry = tk.Entry(self.root, font=("Arial", 14), bd=0, highlightthickness=0,width=15)
-            self.timeEntry = tk.Entry(self.root, font=("Arial", 14), bd=0, highlightthickness=0,width=15)
+            self.velocityEntry = tk.Entry(self.root, font=("Arial", 14), bd=0, highlightthickness=0,width=15)
+            self.massEntry = tk.Entry(self.root, font=("Arial", 14), bd=0, highlightthickness=0,width=15)
             self.resultLabel = Label(self.root, font=("Arial", 20), bg="#e8f6e0", text="")
 
             # Place Entry widgets on the canvas where the images are
-            self.powerEntry_window = self.canvas.create_window(455, 659, anchor=NW, window=self.powerEntry)
-            self.timeEntry_window = self.canvas.create_window(455, 729, anchor=NW, window=self.timeEntry)
+            self.velocityEntry_window = self.canvas.create_window(455, 659, anchor=NW, window=self.velocityEntry)
+            self.massEntry_window = self.canvas.create_window(455, 729, anchor=NW, window=self.massEntry)
             self.resultLabel_window = self.canvas.create_window(1085, 760, anchor=NW, window=self.resultLabel)
 
-            self.calculator = CalculateWork(self.root, self.resultLabel)
+            self.calculator = CalculateKineticEnergy(self.root, self.resultLabel)
 
             #Buttons---------------------------------------
             backButton = Button(
@@ -98,7 +98,7 @@ class Work():
                 background="#ffffff",
                 activebackground="#ffffff",
                 cursor="hand2",
-                command=lambda: self.calculator.calculate(self.powerEntry, self.timeEntry)
+                command=lambda: self.calculator.calculate(self.massEntry, self.velocityEntry)
             )
             self.canvas.create_window(435, 800, anchor=NW, window=calculateButton)
 
@@ -109,8 +109,8 @@ class Work():
                 activebackground="#ffffff",
                 cursor="hand2",
                 command=lambda: [
-                    self.powerEntry.delete(0, tk.END),
-                    self.timeEntry.delete(0, tk.END),
+                    self.velocityEntry.delete(0, tk.END),
+                    self.massEntry.delete(0, tk.END),
                     self.resultLabel.config(text="")
                 ]
             )
