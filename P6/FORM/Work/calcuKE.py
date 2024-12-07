@@ -40,13 +40,13 @@ class Work():
             self.bg = PhotoImage(file="UTILITY/BGhalf.png")
             self.back = PhotoImage(file="UTILITY/backDash.png")
             self.title = PhotoImage(file="AssetsWork/whattoCal.png")
-            self.power = PhotoImage(file="AssetsEnergy/keS.png")
-            self.workSel = PhotoImage(file="AssetsEnergy/pe.png")
+            self.power = PhotoImage(file="AssetsWork/work.png")
             self.solveTable = PhotoImage(file="Cpower/solveTable.png")
-            self.timeTXT = PhotoImage(file="AssetsEnergy/keGiven.png")
-            self.powerINPUT = PhotoImage(file="AssetsEnergy/inputMass.png")
-            self.timeINPUT = PhotoImage(file="AssetsEnergy/inputVelocity.png")
-            self.resultWORK = PhotoImage(file="AssetsEnergy/result.png")
+            self.timeTXT = PhotoImage(file="AssetsWork/givenTxt.png")
+            self.powerINPUT = PhotoImage(file="AssetsWork/angleInput.png")
+            self.timeINPUT = PhotoImage(file="AssetsWork/forceInput.png")
+            self.distanceINPUT = PhotoImage(file="AssetsWork/distance.png")
+            self.resultWORK = PhotoImage(file="AssetsWork/result.png")
             self.calculate = PhotoImage(file="AssetsWork/calculate.png")
             self.reset = PhotoImage(file="AssetsWork/reset.png")
 
@@ -54,19 +54,23 @@ class Work():
             self.canvas_image = self.canvas.create_image(0, 0, anchor=NW, image=self.bg)
             self.titleID = self.canvas.create_image(473, 90, anchor = NW, image = self.title)
             self.solvetableID = self.canvas.create_image(139, 580, anchor=NW, image=self.solveTable)
-            self.timeID = self.canvas.create_image(195,651, anchor=NW, image=self.timeTXT)
-            self.powerInputID = self.canvas.create_image(430, 712, anchor=NW, image=self.powerINPUT)
-            self.timeInputID = self.canvas.create_image(430, 638, anchor=NW, image=self.timeINPUT)
+            self.timeID = self.canvas.create_image(195,631, anchor=NW, image=self.timeTXT)
+            self.powerInputID = self.canvas.create_image(430, 625, anchor=NW, image=self.powerINPUT)
+            self.timeInputID = self.canvas.create_image(430, 700, anchor=NW, image=self.timeINPUT)
+            self.distanceID = self.canvas.create_image(430, 775, anchor=NW, image=self.distanceINPUT)
             self.resultWorkID = self.canvas.create_image(970, 610, anchor=NW, image=self.resultWORK)
 
             # Create Entry widgets to accept user input
-            self.powerEntry = tk.Entry(self.root, font=("Arial", 14), bd=0, highlightthickness=0,width=15)
-            self.timeEntry = tk.Entry(self.root, font=("Arial", 14), bd=0, highlightthickness=0,width=15)
+            self.angleEntry = tk.Entry(self.root, font=("Arial", 14), bd=0, highlightthickness=0,width=15)
+            self.forceEntry = tk.Entry(self.root, font=("Arial", 14), bd=0, highlightthickness=0,width=15)
+            self.distanceEntry = tk.Entry(self.root, font=("Arial", 14), bd=0, highlightthickness=0,width=15)
+            
             self.resultLabel = Label(self.root, font=("Arial", 20), bg="#ffffff", text="")
 
             # Place Entry widgets on the canvas where the images are
-            self.powerEntry_window = self.canvas.create_window(455, 659, anchor=NW, window=self.powerEntry)
-            self.timeEntry_window = self.canvas.create_window(455, 729, anchor=NW, window=self.timeEntry)
+            self.powerEntry_window = self.canvas.create_window(455, 640, anchor=NW, window=self.angleEntry)
+            self.timeEntry_window = self.canvas.create_window(455, 715, anchor=NW, window=self.forceEntry)
+            self.distanceEntry_window = self.canvas.create_window(455, 790, anchor=NW, window=self.distanceEntry)
             self.resultLabel_window = self.canvas.create_window(1085, 760, anchor=NW, window=self.resultLabel)
 
             self.calculator = CalculateWork(self.root, self.resultLabel)
@@ -90,7 +94,7 @@ class Work():
                 cursor="hand2",
                 command=self.controller.open_calculator
             )
-            self.canvas.create_window(295, 158, anchor=NW, window=powerButton)
+            self.canvas.create_window(550, 158, anchor=NW, window=powerButton)
 
             calculateButton = Button(
                 root, image=self.calculate,
@@ -100,7 +104,7 @@ class Work():
                 cursor="hand2",
                 command=lambda: self.calculator.calculate(self.powerEntry, self.timeEntry)
             )
-            self.canvas.create_window(435, 800, anchor=NW, window=calculateButton)
+            self.canvas.create_window(435, 850, anchor=NW, window=calculateButton)
 
             resetButton = Button(
                 root, image=self.reset,
@@ -114,16 +118,7 @@ class Work():
                     self.resultLabel.config(text="")
                 ]
             )
-            self.canvas.create_window(560, 800, anchor=NW, window=resetButton)
-
-            workButton = Button(
-                root, image=self.workSel,
-                borderwidth=0,
-                background="#f4f4f7",
-                activebackground="#f4f4f7",
-                cursor="hand2"
-            )
-            self.canvas.create_window(760, 162, anchor=NW, window=workButton)
+            self.canvas.create_window(560, 850, anchor=NW, window=resetButton)
 
         except Exception as e:
             print(f"Error loading image: {e}")
