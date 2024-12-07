@@ -35,17 +35,17 @@ class EnergyStudyDashboard:
         # Load images
         try:
             # Store image references as instance variables
-            self.studySelected = PhotoImage(file="AssetsEnergy/studyS.png")
+            self.studySelected = PhotoImage(file="AssetsWork/studyS.png")
             self.bg = PhotoImage(file="trace/BG.png")
             self.tab = PhotoImage(file="UTILITY/tab.png")
-            self.greeting = PhotoImage(file="AssetsEnergy/greeting.png")
-            self.tagline = PhotoImage(file="AssetsEnergy/tagline.png")
-            self.know = PhotoImage(file="AssetsEnergy/kmPower.png")
-            self.definitions = PhotoImage(file="AssetsEnergy/definitions.png")
-            self.formula = PhotoImage(file="AssetsEnergy/formula.png")
-            self.problem = PhotoImage(file="AssetsEnergy/probButton.png")
-            self.master_img = PhotoImage(file="AssetsEnergy/master.png")
-            self.calcu = PhotoImage(file="AssetsEnergy/calcu.png")
+            self.greeting = PhotoImage(file="AssetsWork/greeting.png")
+            self.tagline = PhotoImage(file="AssetsWork/tagline.png")
+            self.know = PhotoImage(file="AssetsWork/kmWork.png")
+            self.definitions = PhotoImage(file="AssetsWork/definitions.png")
+            self.formula = PhotoImage(file="AssetsWork/formula.png")
+            self.problem = PhotoImage(file="AssetsWork/probsetButton.png")
+            self.master_img = PhotoImage(file="AssetsWork/master.png")
+            self.calcu = PhotoImage(file="AssetsWork/calcu.png")
 
             # Create images on the canvas
             self.canvas_image = self.canvas.create_image(0, 0, anchor=NW, image=self.bg)
@@ -101,7 +101,7 @@ class EnergyStudyDashboard:
             cursor="hand2",
             command=self.controller.open_problemSet
         )
-        self.canvas.create_window(1026, 1905, anchor=NW, window=problemButton)
+        self.canvas.create_window(1026, 1820, anchor=NW, window=problemButton)
 
 def win():
     root = Tk()

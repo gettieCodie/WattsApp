@@ -45,12 +45,12 @@ class CalcuDashboard():
             self.bg = PhotoImage(file="trace/MASTER.png")
             self.bg = PhotoImage(file="UTILITY/BGhalf.png")
             self.tab = PhotoImage(file="UTILITY/tab.png")
-            self.greeting = PhotoImage(file="AssetsEnergy/greeting.png")
-            self.tagline = PhotoImage(file="AssetsEnergy/TAGLINE.png")
-            self.know = PhotoImage(file="AssetsEnergy/kmPower.png")
-            self.study = PhotoImage(file="AssetsEnergy/study.png")
-            self.master = PhotoImage(file="AssetsEnergy/master.png")
-            self.calcuSelected = PhotoImage(file="AssetsEnergy/calcuS.png")
+            self.greeting = PhotoImage(file="AssetsWork/greeting.png")
+            self.tagline = PhotoImage(file="AssetsWork/tagline.png")
+            self.know = PhotoImage(file="AssetsWork/kmWork.png")
+            self.study = PhotoImage(file="AssetsWork/study.png")
+            self.master = PhotoImage(file="AssetsWork/master.png")
+            self.calcuSelected = PhotoImage(file="AssetsWork/calcuS.png")
 
 
             # Create images on the canvas

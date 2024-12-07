@@ -2,7 +2,7 @@ class CalculatePower:
     def __init__(self, root):
         self.root = root
 
-    def calculate_energy(self):
+    def calculate_power(self):
         # Get input values
         work = self.workEntry.get()
         time = self.timeEntry.get()

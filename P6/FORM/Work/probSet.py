@@ -36,8 +36,8 @@ class ProblemSet:
             # Store image references as instance variables
             self.bg = PhotoImage(file="trace/BG.png")
             self.tab = PhotoImage(file="UTILITY/tab.png")
-            self.prob1 = PhotoImage(file="AssetsEnergy/probset1.png")
-            self.prob2 = PhotoImage(file="AssetsEnergy/probset2.png")
+            self.prob1 = PhotoImage(file="AssetsWork/1.png")
+            self.prob2 = PhotoImage(file="AssetsWork/2.png")
             self.back = PhotoImage(file="UTILITY/backDash.png")
             
 

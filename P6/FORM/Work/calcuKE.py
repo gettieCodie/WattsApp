@@ -39,7 +39,7 @@ class Work():
             # self.bg = PhotoImage(file="trace/CalPower.png")
             self.bg = PhotoImage(file="UTILITY/BGhalf.png")
             self.back = PhotoImage(file="UTILITY/backDash.png")
-            self.title = PhotoImage(file="AssetsEnergy/chooseCal.png")
+            self.title = PhotoImage(file="AssetsWork/whattoCal.png")
             self.power = PhotoImage(file="AssetsEnergy/keS.png")
             self.workSel = PhotoImage(file="AssetsEnergy/pe.png")
             self.solveTable = PhotoImage(file="Cpower/solveTable.png")
@@ -47,8 +47,8 @@ class Work():
             self.powerINPUT = PhotoImage(file="AssetsEnergy/inputMass.png")
             self.timeINPUT = PhotoImage(file="AssetsEnergy/inputVelocity.png")
             self.resultWORK = PhotoImage(file="AssetsEnergy/result.png")
-            self.calculate = PhotoImage(file="AssetsEnergy/calculate.png")
-            self.reset = PhotoImage(file="AssetsEnergy/reset.png")
+            self.calculate = PhotoImage(file="AssetsWork/calculate.png")
+            self.reset = PhotoImage(file="AssetsWork/reset.png")
 
             # Create images on the canvas
             self.canvas_image = self.canvas.create_image(0, 0, anchor=NW, image=self.bg)

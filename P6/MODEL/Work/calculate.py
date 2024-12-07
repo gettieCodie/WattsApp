@@ -1,10 +1,10 @@
 import os
 import sys
 current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(current_dir, "Energy"))
+sys.path.insert(0, os.path.join(current_dir, "Power"))
 from tkinter import messagebox
 
-class CalculateEnergy:
+class CalculatePower:
     def __init__(self, root, result_label):
         self.root = root
         self.result_label = result_label
@@ -50,6 +50,6 @@ class CalculateTime:
             time = work / power
             self.result_label.config(text=f"{time:.2f} s")  # Update result label
         except ValueError:
-            messagebox.showerror("Invalid Input", "Please enter numeric values for Work and Time.")
+            messagebox.showerror("Invalid Input", "Please enter numeric values for Work and Power.")
         except ZeroDivisionError as e:
             messagebox.showerror("Error", str(e))
