@@ -39,16 +39,16 @@ class FlashDash():
             self.current_card = 0
             self.is_front = True
             self.flashcards = [
-                    ("FLASH/POWER/Definitions/DPower 1.png", "FLASH/POWER/Terms/TPower 1.png"),
-                    ("FLASH/POWER/Definitions/DPower 2.png", "FLASH/POWER/Terms/TPower 2.png"),
-                    ("FLASH/POWER/Definitions/DPower 3.png", "FLASH/POWER/Terms/TPower 3.png"),
-                    ("FLASH/POWER/Definitions/DPower 4.png", "FLASH/POWER/Terms/TPower 4.png"),
-                    ("FLASH/POWER/Definitions/DPower 5.png", "FLASH/POWER/Terms/TPower 5.png"),
-                    ("FLASH/POWER/Definitions/DPower 6.png", "FLASH/POWER/Terms/TPower 6.png"),
-                    ("FLASH/POWER/Definitions/DPower 7.png", "FLASH/POWER/Terms/TPower 7.png"),
-                    ("FLASH/POWER/Definitions/DPower 8.png", "FLASH/POWER/Terms/TPower 8.png"),
-                    ("FLASH/POWER/Definitions/DPower 9.png", "FLASH/POWER/Terms/TPower 9.png"),
-                    ("FLASH/POWER/Definitions/DPower 10.png", "FLASH/POWER/Terms/TPower 10.png")
+                    ("FLASH/ENERGY/Definitions/DEnergy 1.png", "FLASH/ENERGY/Terms/TEnergy 1.png"),
+                    ("FLASH/ENERGY/Definitions/DEnergy 2.png", "FLASH/ENERGY/Terms/TEnergy 2.png"),
+                    ("FLASH/ENERGY/Definitions/DEnergy 3.png", "FLASH/ENERGY/Terms/TEnergy 3.png"),
+                    ("FLASH/ENERGY/Definitions/DEnergy 4.png", "FLASH/ENERGY/Terms/TEnergy 4.png"),
+                    ("FLASH/ENERGY/Definitions/DEnergy 5.png", "FLASH/ENERGY/Terms/TEnergy 5.png"),
+                    ("FLASH/ENERGY/Definitions/DEnergy 6.png", "FLASH/ENERGY/Terms/TEnergy 6.png"),
+                    ("FLASH/ENERGY/Definitions/DEnergy 7.png", "FLASH/ENERGY/Terms/TEnergy 7.png"),
+                    ("FLASH/ENERGY/Definitions/DEnergy 8.png", "FLASH/ENERGY/Terms/TEnergy 8.png"),
+                    ("FLASH/ENERGY/Definitions/DEnergy 9.png", "FLASH/ENERGY/Terms/TEnergy 9.png"),
+                    ("FLASH/ENERGY/Definitions/DEnergy 10.png", "FLASH/ENERGY/Terms/TEnergy 10.png")
             ]
             self.front_image = PhotoImage(file=self.flashcards[self.current_card][0])
             self.back_image = PhotoImage(file=self.flashcards[self.current_card][1])
