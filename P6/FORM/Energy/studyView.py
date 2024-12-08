@@ -130,7 +130,6 @@ class EnergyStudyDashboard:
         powerButton.bind("<Leave>", lambda event: self.on_leave(event, powerButton, self.powerTab))
         self.powerButton_window = self.canvas.create_window(90, 230, anchor=NW, window=powerButton)
 
-
         energyButton = Button(
             root, image=self.energyTab,
             borderwidth=0,
