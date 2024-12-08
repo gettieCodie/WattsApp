@@ -49,16 +49,16 @@ class Calculator:
 class Study_Dashboard: 
     @staticmethod
     def back(root):
-        from studyView import StudyDashboard
+        from studyView import EnergyStudyDashboard
         for widget in root.winfo_children():
             widget.pack_forget()
-        StudyDashboard(root)
+        EnergyStudyDashboard(root)
     
     def launch(root):
-        from studyView import StudyDashboard
+        from studyView import EnergyStudyDashboard
         for widget in root.winfo_children():
             widget.pack_forget()
-        StudyDashboard(root)
+        EnergyStudyDashboard(root)
 
 class FlashCards:
     @staticmethod
