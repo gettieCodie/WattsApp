@@ -39,16 +39,16 @@ class FlashDash():
             self.current_card = 0
             self.is_front = True
             self.flashcards = [
-                    ("FLASH/POWER/Definitions/DPower 1.png", "FLASH/POWER/Terms/TPower 1.png"),
-                    ("FLASH/POWER/Definitions/DPower 2.png", "FLASH/POWER/Terms/TPower 2.png"),
-                    ("FLASH/POWER/Definitions/DPower 3.png", "FLASH/POWER/Terms/TPower 3.png"),
-                    ("FLASH/POWER/Definitions/DPower 4.png", "FLASH/POWER/Terms/TPower 4.png"),
-                    ("FLASH/POWER/Definitions/DPower 5.png", "FLASH/POWER/Terms/TPower 5.png"),
-                    ("FLASH/POWER/Definitions/DPower 6.png", "FLASH/POWER/Terms/TPower 6.png"),
-                    ("FLASH/POWER/Definitions/DPower 7.png", "FLASH/POWER/Terms/TPower 7.png"),
-                    ("FLASH/POWER/Definitions/DPower 8.png", "FLASH/POWER/Terms/TPower 8.png"),
-                    ("FLASH/POWER/Definitions/DPower 9.png", "FLASH/POWER/Terms/TPower 9.png"),
-                    ("FLASH/POWER/Definitions/DPower 10.png", "FLASH/POWER/Terms/TPower 10.png")
+                    ("FLASH/WORK/Definitions/DWork 1.png", "FLASH/WORK/Terms/TWork 1.png"),
+                    ("FLASH/WORK/Definitions/DWork 2.png", "FLASH/WORK/Terms/TWork 2.png"),
+                    ("FLASH/WORK/Definitions/DWork 3.png", "FLASH/WORK/Terms/TWork 3.png"),
+                    ("FLASH/WORK/Definitions/DWork4.png", "FLASH/WORK/Terms/TWork 4.png"),
+                    ("FLASH/WORK/Definitions/DWork 5.png", "FLASH/WORK/Terms/TWork 5.png"),
+                    ("FLASH/WORK/Definitions/DWork 6.png", "FLASH/WORK/Terms/TWork 6.png"),
+                    ("FLASH/WORK/Definitions/DWork 7.png", "FLASH/WORK/Terms/TWork 7.png"),
+                    ("FLASH/WORK/Definitions/DWork 8.png", "FLASH/WORK/Terms/TWork 8.png"),
+                    ("FLASH/WORK/Definitions/DWork 9.png", "FLASH/WORK/Terms/TWork 9.png"),
+                    ("FLASH/WORK/Definitions/DWork 10.png", "FLASH/WORK/Terms/TWork 10.png")
             ]
             self.front_image = PhotoImage(file=self.flashcards[self.current_card][0])
             self.back_image = PhotoImage(file=self.flashcards[self.current_card][1])
