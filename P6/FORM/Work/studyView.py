@@ -13,6 +13,12 @@ class WorkStudyDashboard:
     def on_mousewheel(self, event):
         self.canvas.yview_scroll(-1 * (event.delta // 120), "units")  # Scroll by units
 
+    def on_enter(self, event, button, hover_image):
+        button.config(image=hover_image)
+
+    def on_leave(self, event, button, original_image):
+        button.config(image=original_image)
+    
     def __init__(self, root):
         self.root = root
         self.root.geometry("1440x1024")
