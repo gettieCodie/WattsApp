@@ -2,10 +2,16 @@ from tkinter import *
 import os
 import sys
 current_dir = os.path.dirname(os.path.abspath(__file__))
-model_dir = os.path.join(current_dir, "../../MODEL/Energy")
+model_dir = os.path.join(current_dir, "../../MODEL/Power")
+model_dir1 = os.path.join(current_dir, "../../MODEL/Energy")
+model_dir2 = os.path.join(current_dir, "../../MODEL/Work")
 sys.path.append(os.path.normpath(model_dir))
+sys.path.append(os.path.normpath(model_dir1))
+sys.path.append(os.path.normpath(model_dir2))
 
-from controller import AppController
+from controller_power import AppControllerPower
+from controller_energy import AppControllerEnergy
+from controller_work import AppControllerWork
 
 # from main import ButtonFunctions
 
@@ -25,7 +31,9 @@ class CalcuDashboard():
         self.root.geometry("1440x1024")
         self.root.title("Watt's App")
 
-        self.controller = AppController(self.root)
+        self.Pcontroller = AppControllerPower(self.root)
+        self.Econtroller = AppControllerEnergy(self.root)
+        self.Wcontroller = AppControllerWork(self.root)
 
         # Create a canvas
         self.canvas = Canvas(root, width=1440, height=1024, bg = "#f4f4f7")
@@ -79,7 +87,7 @@ class CalcuDashboard():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_studyDash
+            command=self.Pcontroller.open_studyDash
         )
         self.canvas.create_window(414, 556, anchor=NW, window=studyButton)
 
@@ -89,7 +97,7 @@ class CalcuDashboard():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_masterDash
+            command=self.Pcontroller.open_masterDash
         )
         self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
 
@@ -99,7 +107,7 @@ class CalcuDashboard():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_calculator
+            command=self.Pcontroller.open_calculator
         )
         self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
 
@@ -124,7 +132,7 @@ class CalcuDashboard():
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.Econtroller.open_calcuDash
         )
         # Bind hover effects to masterButton
         energyButton.bind("<Enter>", lambda event: self.on_enter(event, energyButton, self.energyHover))
@@ -137,7 +145,7 @@ class CalcuDashboard():
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.Wcontroller.open_calcuDash
         )
         # Bind hover effects to masterButton
         workButton.bind("<Enter>", lambda event: self.on_enter(event, workButton, self.workHover))

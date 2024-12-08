@@ -3,11 +3,17 @@ import sys
 from tkinter import *
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-model_dir = os.path.join(current_dir, "../../MODEL/Power")
-sys.path.append(os.path.normpath(model_dir))
+sys.path.extend([
+    os.path.join(current_dir, "../../MODEL/Power"),
+    os.path.join(current_dir, "../../MODEL/Energy"),
+    os.path.join(current_dir, "../../MODEL/Work")
+])
+form_dir = os.path.abspath(os.path.join(current_dir, '../../')) 
+sys.path.append(form_dir)
 
-from controller import AppController
-
+from controller_power import AppControllerPower
+from controller_energy import AppControllerEnergy
+from controller_work import AppControllerWork
 #
 
 class StudyDashboard:
@@ -25,7 +31,9 @@ class StudyDashboard:
         self.root.geometry("1440x1024")
         self.root.title("Watt's App")
 
-        self.controller = AppController(self.root)
+        self.Pcontroller = AppControllerPower(self.root)
+        self.Econtroller = AppControllerEnergy(self.root)
+        self.Wcontroller = AppControllerWork(self.root)
 
         # Create a canvas
         self.canvas = Canvas(root, width=1440, height=1024)
@@ -82,7 +90,7 @@ class StudyDashboard:
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
-            cursor="hand2",
+            cursor="hand2"
         )
         self.canvas.create_window(414, 556, anchor=NW, window=studyButton)
 
@@ -92,7 +100,7 @@ class StudyDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_masterDash
+            command=self.Pcontroller.open_masterDash
         )
         self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
 
@@ -102,7 +110,7 @@ class StudyDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_calculator
+            command=self.Pcontroller.open_calculator
         )
         self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
 
@@ -112,10 +120,9 @@ class StudyDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_problemSet
+            command=self.Pcontroller.open_problemSet
         )
         self.canvas.create_window(1026, 1820, anchor=NW, window=problemButton)
-
 
         powerButton = Button(
             root, image=self.powerTab,
@@ -123,13 +130,12 @@ class StudyDashboard:
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.Pcontroller.open_studyDash
         )
         # Bind hover effects to masterButton
         powerButton.bind("<Enter>", lambda event: self.on_enter(event, powerButton, self.powerHover))
         powerButton.bind("<Leave>", lambda event: self.on_leave(event, powerButton, self.powerTab))
-        self.powerButton_window = self.canvas.create_window(90, 230, anchor=NW, window=powerButton)
-
+        self.canvas.create_window(90, 230, anchor=NW, window=powerButton)
 
         energyButton = Button(
             root, image=self.energyTab,
@@ -137,12 +143,12 @@ class StudyDashboard:
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.launch_EnergyStudyDash
         )
         # Bind hover effects to masterButton
         energyButton.bind("<Enter>", lambda event: self.on_enter(event, energyButton, self.energyHover))
         energyButton.bind("<Leave>", lambda event: self.on_leave(event, energyButton, self.energyTab))
-        self.energyButton_window = self.canvas.create_window(90, 310, anchor=NW, window=energyButton)
+        self.canvas.create_window(90, 310, anchor=NW, window=energyButton)
 
         workButton = Button(
             root, image=self.workTab,
@@ -150,15 +156,24 @@ class StudyDashboard:
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.launch_WorkStudyDash
         )
         # Bind hover effects to masterButton
         workButton.bind("<Enter>", lambda event: self.on_enter(event, workButton, self.workHover))
         workButton.bind("<Leave>", lambda event: self.on_leave(event, workButton, self.workTab))
         self.workButton_window = self.canvas.create_window(90, 390, anchor=NW, window=workButton)
 
-
-
+    def launch_EnergyStudyDash(self):
+        from FORM.Energy.studyView import EnergyStudyDashboard
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+        EnergyStudyDashboard(self.root)
+    
+    def launch_WorkStudyDash(self):
+        from FORM.Work.studyView import WorkStudyDashboard
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+        WorkStudyDashboard(self.root)
 
 
 def win():

@@ -4,9 +4,15 @@ import sys
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 model_dir = os.path.join(current_dir, "../../MODEL/Power")
+model_dir1 = os.path.join(current_dir, "../../MODEL/Energy")
+model_dir2 = os.path.join(current_dir, "../../MODEL/Work")
 sys.path.append(os.path.normpath(model_dir))
+sys.path.append(os.path.normpath(model_dir1))
+sys.path.append(os.path.normpath(model_dir2))
 
-from controller import AppController
+from controller_power import AppControllerPower
+from controller_energy import AppControllerEnergy
+from controller_work import AppControllerWork
 
 class ProblemSet:
     def on_mousewheel(self, event):
@@ -17,13 +23,15 @@ class ProblemSet:
 
     def on_leave(self, event, button, original_image):
         button.config(image=original_image)
- 
+
     def __init__(self, root):
         self.root = root
         self.root.geometry("1440x1024")
         self.root.title("Watt's App")
 
-        self.controller = AppController(self.root)
+        self.Pcontroller = AppControllerPower(self.root)
+        self.Econtroller = AppControllerEnergy(self.root)
+        self.Wcontroller = AppControllerWork(self.root)
 
         # Create a canvas
         self.canvas = Canvas(root, width=1440, height=1024)
@@ -70,7 +78,7 @@ class ProblemSet:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.back_studyDash
+            command=self.Pcontroller.back_studyDash
         )
         self.canvas.create_window(414, 35, anchor=NW, window=backButton)
         
@@ -80,13 +88,12 @@ class ProblemSet:
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            # command=self.Pcontroller.open_problemSet
         )
         # Bind hover effects to masterButton
         powerButton.bind("<Enter>", lambda event: self.on_enter(event, powerButton, self.powerHover))
         powerButton.bind("<Leave>", lambda event: self.on_leave(event, powerButton, self.powerTab))
         self.powerButton_window = self.canvas.create_window(90, 230, anchor=NW, window=powerButton)
-
 
         energyButton = Button(
             root, image=self.energyTab,
@@ -94,7 +101,7 @@ class ProblemSet:
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.Econtroller.open_problemSet
         )
         # Bind hover effects to masterButton
         energyButton.bind("<Enter>", lambda event: self.on_enter(event, energyButton, self.energyHover))
@@ -107,7 +114,7 @@ class ProblemSet:
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.Wcontroller.open_problemSet
         )
         # Bind hover effects to masterButton
         workButton.bind("<Enter>", lambda event: self.on_enter(event, workButton, self.workHover))

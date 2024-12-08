@@ -33,6 +33,12 @@ class Calculator:
         for widget in root.winfo_children():
             widget.pack_forget()
         Work(root)
+    
+    def launch(root):
+        from calcuDash import CalcuDashboard
+        for widget in root.winfo_children():
+            widget.pack_forget()
+        CalcuDashboard(root)
 
     def back(root):
         from calcuDash import CalcuDashboard

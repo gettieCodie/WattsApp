@@ -7,7 +7,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 model_dir = os.path.join(current_dir, "../../MODEL/Power")
 sys.path.append(os.path.normpath(model_dir))
 
-from controller import AppController
+from controller_power import AppControllerPower
 from calculate import CalculatePower
 from calcuDash import CalcuDashboard
 
@@ -20,7 +20,7 @@ class Power():
         self.root.geometry("1440x1024")
         self.root.title("Watt's App")
 
-        self.controller = AppController(self.root)
+        self.controller = AppControllerPower(self.root)
 
         # Create a canvas
         self.canvas = Canvas(root, width=1440, height=1024, bg = "#f4f4f7")

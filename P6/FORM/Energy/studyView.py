@@ -3,10 +3,15 @@ import sys
 from tkinter import *
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-model_dir = os.path.join(current_dir, "../../MODEL/Energy")
-sys.path.append(os.path.normpath(model_dir))
+sys.path.extend([
+    os.path.join(current_dir, "../../MODEL/Power"),
+    os.path.join(current_dir, "../../MODEL/Energy"),
+    os.path.join(current_dir, "../../MODEL/Work")
+])
 
-from controller import AppController
+from controller_power import AppControllerPower
+from controller_energy import AppControllerEnergy
+from controller_work import AppControllerWork
 
 
 class EnergyStudyDashboard:
@@ -19,13 +24,15 @@ class EnergyStudyDashboard:
 
     def on_leave(self, event, button, original_image):
         button.config(image=original_image)
- 
+
     def __init__(self, root):
         self.root = root
         self.root.geometry("1440x1024")
         self.root.title("Watt's App")
 
-        self.controller = AppController(self.root)
+        self.Pcontroller = AppControllerPower(self.root)
+        self.Econtroller = AppControllerEnergy(self.root)
+        self.Wcontroller = AppControllerWork(self.root)
 
         # Create a canvas
         self.canvas = Canvas(root, width=1440, height=1024, bg = "#f4f4f7")
@@ -82,7 +89,7 @@ class EnergyStudyDashboard:
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
-            cursor="hand2",
+            cursor="hand2"
         )
         self.canvas.create_window(414, 556, anchor=NW, window=studyButton)
 
@@ -92,7 +99,7 @@ class EnergyStudyDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_masterDash
+            command=self.Econtroller.open_masterDash
         )
         self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
 
@@ -102,7 +109,7 @@ class EnergyStudyDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_calculatorKE
+            command=self.Econtroller.open_calculatorKE
         )
         self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
 
@@ -112,10 +119,9 @@ class EnergyStudyDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_problemSet
+            command=self.Econtroller.open_problemSet
         )
         self.canvas.create_window(1026, 1905, anchor=NW, window=problemButton)
-
 
         powerButton = Button(
             root, image=self.powerTab,
@@ -123,13 +129,12 @@ class EnergyStudyDashboard:
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.Econtroller.open_studyDash
         )
         # Bind hover effects to masterButton
         powerButton.bind("<Enter>", lambda event: self.on_enter(event, powerButton, self.powerHover))
         powerButton.bind("<Leave>", lambda event: self.on_leave(event, powerButton, self.powerTab))
         self.powerButton_window = self.canvas.create_window(90, 230, anchor=NW, window=powerButton)
-
 
         energyButton = Button(
             root, image=self.energyTab,
@@ -150,7 +155,7 @@ class EnergyStudyDashboard:
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.Wcontroller.open_studyDash
         )
         # Bind hover effects to masterButton
         workButton.bind("<Enter>", lambda event: self.on_enter(event, workButton, self.workHover))

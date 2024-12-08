@@ -3,10 +3,15 @@ import sys
 from tkinter import *
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-model_dir = os.path.join(current_dir, "../../MODEL/Work")
-sys.path.append(os.path.normpath(model_dir))
+sys.path.extend([
+    os.path.join(current_dir, "../../MODEL/Power"),
+    os.path.join(current_dir, "../../MODEL/Energy"),
+    os.path.join(current_dir, "../../MODEL/Work")
+])
 
-from controller import AppController
+from controller_power import AppControllerPower
+from controller_energy import AppControllerEnergy
+from controller_work import AppControllerWork
 
 
 class WorkStudyDashboard:
@@ -24,7 +29,9 @@ class WorkStudyDashboard:
         self.root.geometry("1440x1024")
         self.root.title("Watt's App")
 
-        self.controller = AppController(self.root)
+        self.Pcontroller = AppControllerPower(self.root)
+        self.Econtroller = AppControllerEnergy(self.root)
+        self.Wcontroller = AppControllerWork(self.root)
 
         # Create a canvas
         self.canvas = Canvas(root, width=1440, height=1024, bg = "#f4f4f7")
@@ -85,7 +92,7 @@ class WorkStudyDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_masterDash
+            command=self.Wcontroller.open_masterDash
         )
         self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
 
@@ -95,7 +102,7 @@ class WorkStudyDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_calculator
+            command=self.Wcontroller.open_calculator
         )
         self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
 
@@ -105,7 +112,7 @@ class WorkStudyDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_problemSet
+            command=self.Wcontroller.open_problemSet
         )
         self.canvas.create_window(1026, 1820, anchor=NW, window=problemButton)
 

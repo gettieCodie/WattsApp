@@ -4,9 +4,15 @@ import sys
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 model_dir = os.path.join(current_dir, "../../MODEL/Power")
+model_dir1 = os.path.join(current_dir, "../../MODEL/Energy")
+model_dir2 = os.path.join(current_dir, "../../MODEL/Work")
 sys.path.append(os.path.normpath(model_dir))
+sys.path.append(os.path.normpath(model_dir1))
+sys.path.append(os.path.normpath(model_dir2))
 
-from controller import AppController
+from controller_power import AppControllerPower
+from controller_energy import AppControllerEnergy
+from controller_work import AppControllerWork
 
 
 class MasterDashboard():
@@ -25,7 +31,9 @@ class MasterDashboard():
         self.root.geometry("1440x1024")
         self.root.title("Watt's App")
 
-        self.controller = AppController(self.root)
+        self.Pcontroller = AppControllerPower(self.root)
+        self.Econtroller = AppControllerEnergy(self.root)
+        self.Wcontroller = AppControllerWork(self.root)
 
         # Create a canvas
         self.canvas = Canvas(root, width=1440, height=1024)
@@ -80,7 +88,7 @@ class MasterDashboard():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command= self.controller.open_studyDash
+            command= self.Pcontroller.open_studyDash
         )
         self.canvas.create_window(414, 556, anchor=NW, window=studyButton)
 
@@ -89,7 +97,7 @@ class MasterDashboard():
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
-            cursor="hand2",
+            cursor="hand2"
         )
         self.masterButton_window = self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
 
@@ -99,7 +107,7 @@ class MasterDashboard():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_calculator
+            command=self.Pcontroller.open_calculator
         )
         self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
 
@@ -109,7 +117,7 @@ class MasterDashboard():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.start_flashCard
+            command=self.Pcontroller.start_flashCard
         )
 
         # Bind hover effects to masterButton
@@ -117,7 +125,6 @@ class MasterDashboard():
         flashDefButton.bind("<Leave>", lambda event: self.on_leave(event, flashDefButton, self.flashDef))
 
         self.flashDefButton_window = self.canvas.create_window(720, 868, anchor=NW, window=flashDefButton)
-
 
         powerButton = Button(
             root, image=self.powerTab,
@@ -132,14 +139,13 @@ class MasterDashboard():
         powerButton.bind("<Leave>", lambda event: self.on_leave(event, powerButton, self.powerTab))
         self.powerButton_window = self.canvas.create_window(90, 230, anchor=NW, window=powerButton)
 
-
         energyButton = Button(
             root, image=self.energyTab,
             borderwidth=0,
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.Econtroller.open_masterDash
         )
         # Bind hover effects to masterButton
         energyButton.bind("<Enter>", lambda event: self.on_enter(event, energyButton, self.energyHover))
@@ -152,7 +158,7 @@ class MasterDashboard():
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.Wcontroller.open_masterDash
         )
         # Bind hover effects to masterButton
         workButton.bind("<Enter>", lambda event: self.on_enter(event, workButton, self.workHover))

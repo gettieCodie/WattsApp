@@ -99,9 +99,6 @@ class FlashDash():
             command=self.next_card
             )
             self.prev_Button_window = self.canvas.create_window(790, 820, anchor=NW, window=forButton)
-
-            
-
         except Exception as e:
             print(f"Error loading image: {e}")
 

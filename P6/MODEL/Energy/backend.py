@@ -39,6 +39,12 @@ class Calculator:
         for widget in root.winfo_children():
             widget.pack_forget()
         PotentialEnergy(root)
+    
+    def launch(root):
+        from calcuDash import CalcuDashboard
+        for widget in root.winfo_children():
+            widget.pack_forget()
+        CalcuDashboard(root)
 
     def back(root):
         from calcuDash import CalcuDashboard
@@ -56,6 +62,7 @@ class Study_Dashboard:
     
     def launch(root):
         from studyView import EnergyStudyDashboard
+        print("Energy Study Dashboard opened.")
         for widget in root.winfo_children():
             widget.pack_forget()
         EnergyStudyDashboard(root)

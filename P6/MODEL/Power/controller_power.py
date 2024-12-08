@@ -1,6 +1,6 @@
 from backend import *
 
-class AppController:
+class AppControllerPower:
     def __init__(self, root):
         self.root = root
     
@@ -20,7 +20,13 @@ class AppController:
         Study_Dashboard.back(self.root)
 
     def open_calculator(self):
+        Calculator.launchPower(self.root)
+    
+    def open_calcuWork(self):
         Calculator.launchWork(self.root)
+    
+    def open_calcuTime(self):
+        Calculator.launchTime(self.root)
     
     def back_calcuDash(self):
         Calculator.back(self.root)
