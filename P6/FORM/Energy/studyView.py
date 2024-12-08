@@ -89,7 +89,7 @@ class EnergyStudyDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_calculator
+            command=self.controller.open_calculatorKE
         )
         self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
 

@@ -40,7 +40,6 @@ class ProblemSet:
             self.prob2 = PhotoImage(file="PROBSET/2.png")
             self.back = PhotoImage(file="UTILITY/backDash.png")
             
-
             # Create images on the canvas
             self.canvas_image = self.canvas.create_image(0, 0, anchor=NW, image=self.bg)
             self.tabID = self.canvas.create_image(52, 35, anchor=NW, image=self.tab)
@@ -52,7 +51,6 @@ class ProblemSet:
 
         # Configure the scroll region to match the image height
         self.canvas.config(scrollregion=self.canvas.bbox(ALL))
-
         
         backButton = Button(
             root, image=self.back,

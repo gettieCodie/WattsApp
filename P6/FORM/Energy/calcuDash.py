@@ -52,7 +52,6 @@ class CalcuDashboard():
             self.master = PhotoImage(file="AssetsEnergy/master.png")
             self.calcuSelected = PhotoImage(file="AssetsEnergy/calcuS.png")
 
-
             # Create images on the canvas
             self.canvas_image = self.canvas.create_image(0, 0, anchor=NW, image=self.bg)
             self.tabID = self.canvas.create_image(52, 35, anchor=NW, image=self.tab)
@@ -93,8 +92,7 @@ class CalcuDashboard():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_calculator
-
+            command=self.controller.open_calculatorKE
         )
         self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
 

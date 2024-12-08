@@ -61,8 +61,8 @@ class FlashDash():
             root, image=self.front_image,
             width=1220,
             height=670,
-            bg="#f4f4f7",  # Set the background color
-            highlightthickness=0  # Remove border
+            bg="#f4f4f7", 
+            highlightthickness=0 
 
             )
             self.card_label.bind("<Button-1>", self.flip_card)
@@ -105,7 +105,6 @@ class FlashDash():
         except Exception as e:
             print(f"Error loading image: {e}")
 
-        # Configure the scroll region to match the image height
         self.canvas.config(scrollregion=self.canvas.bbox(ALL))
 
         

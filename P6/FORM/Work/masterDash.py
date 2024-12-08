@@ -83,7 +83,7 @@ class MasterDashboard():
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
-            cursor="hand2",
+            cursor="hand2"
         )
         self.masterButton_window = self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
 

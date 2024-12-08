@@ -1,5 +1,4 @@
 from backend import *
-from calculatePow import CalculatePower
 
 class AppController:
     def __init__(self, root):

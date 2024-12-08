@@ -11,7 +11,7 @@ from controller import AppController
 from calculate import CalculatePotentialEnergy
 from masterDash import MasterDashboard
 
-class Work():
+class PotentialEnergy():
     def on_mousewheel(self, event):
         self.canvas.yview_scroll(-1 * (event.delta // 120), "units")  # Scroll by units
 
@@ -82,16 +82,6 @@ class Work():
             )
             self.canvas.create_window(149, 70, anchor=NW, window=backButton)
 
-            powerButton = Button(
-                root, image=self.power,
-                borderwidth=0,
-                background="#f4f4f7",
-                activebackground="#f4f4f7",
-                cursor="hand2",
-                command=self.controller.open_calculator
-            )
-            self.canvas.create_window(295, 158, anchor=NW, window=powerButton)
-
             calculateButton = Button(
                 root, image=self.calculate,
                 borderwidth=0,
@@ -116,14 +106,25 @@ class Work():
             )
             self.canvas.create_window(560, 800, anchor=NW, window=resetButton)
 
-            workButton = Button(
+            keButton = Button(
+                root, image=self.power,
+                borderwidth=0,
+                background="#f4f4f7",
+                activebackground="#f4f4f7",
+                cursor="hand2",
+                command=self.controller.open_calculatorKE
+            )
+            self.canvas.create_window(295, 158, anchor=NW, window=keButton)
+
+            peButton = Button(
                 root, image=self.workSel,
                 borderwidth=0,
                 background="#f4f4f7",
                 activebackground="#f4f4f7",
-                cursor="hand2"
+                cursor="hand2",
+                command=self.controller.open_calculatorPE
             )
-            self.canvas.create_window(760, 162, anchor=NW, window=workButton)
+            self.canvas.create_window(760, 162, anchor=NW, window=peButton)
 
         except Exception as e:
             print(f"Error loading image: {e}")
@@ -133,7 +134,7 @@ class Work():
 
 def win():
     root = Tk()
-    Work(root)
+    PotentialEnergy(root)
     root.mainloop()
 
 if __name__ == "__main__":

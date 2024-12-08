@@ -7,8 +7,6 @@ sys.path.append(os.path.normpath(model_dir))
 
 from controller import AppController
 
-# from main import ButtonFunctions
-
 class CalcuDashboard():
     def on_mousewheel(self, event):
         self.canvas.yview_scroll(-1 * (event.delta // 120), "units")  # Scroll by units

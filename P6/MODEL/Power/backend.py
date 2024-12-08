@@ -1,7 +1,7 @@
 import os
 import sys
 current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(current_dir, "Work"))
+sys.path.insert(0, os.path.join(current_dir, "Power"))
 
 
 class Problem_Set:

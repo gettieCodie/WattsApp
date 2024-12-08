@@ -1,7 +1,7 @@
 import os
 import sys
 current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(current_dir, "Power"))
+sys.path.insert(0, os.path.join(current_dir, "Work"))
 
 
 class Problem_Set:
@@ -28,23 +28,11 @@ class Master_Dashboard:
 
 class Calculator:
     @staticmethod
-    def launchPower(root):
-        from calcuPower import Power
-        for widget in root.winfo_children():
-            widget.pack_forget()
-        Power(root)
-
     def launchWork(root):
         from calcuWork import Work
         for widget in root.winfo_children():
             widget.pack_forget()
         Work(root)
-    
-    def launchTime(root):
-        from calcuTime import Time
-        for widget in root.winfo_children():
-            widget.pack_forget()
-        Time(root)
 
     def back(root):
         from calcuDash import CalcuDashboard
@@ -55,16 +43,16 @@ class Calculator:
 class Study_Dashboard: 
     @staticmethod
     def back(root):
-        from studyView import StudyDashboard
+        from studyView import WorkStudyDashboard
         for widget in root.winfo_children():
             widget.pack_forget()
-        StudyDashboard(root)
+        WorkStudyDashboard(root)
     
     def launch(root):
-        from studyView import StudyDashboard
+        from studyView import WorkStudyDashboard
         for widget in root.winfo_children():
             widget.pack_forget()
-        StudyDashboard(root)
+        WorkStudyDashboard(root)
 
 class FlashCards:
     @staticmethod

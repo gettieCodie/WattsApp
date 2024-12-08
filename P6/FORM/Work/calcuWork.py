@@ -65,13 +65,13 @@ class Work():
             self.forceEntry = tk.Entry(self.root, font=("Arial", 14), bd=0, highlightthickness=0,width=15)
             self.distanceEntry = tk.Entry(self.root, font=("Arial", 14), bd=0, highlightthickness=0,width=15)
             
-            self.resultLabel = Label(self.root, font=("Arial", 20), bg="#ffffff", text="")
+            self.resultLabel = Label(self.root, font=("Arial", 20), bg="#dee9ff", text="")
 
             # Place Entry widgets on the canvas where the images are
-            self.powerEntry_window = self.canvas.create_window(455, 640, anchor=NW, window=self.angleEntry)
-            self.timeEntry_window = self.canvas.create_window(455, 715, anchor=NW, window=self.forceEntry)
+            self.angleEntry_window = self.canvas.create_window(455, 640, anchor=NW, window=self.angleEntry)
+            self.forceEntry_window = self.canvas.create_window(455, 715, anchor=NW, window=self.forceEntry)
             self.distanceEntry_window = self.canvas.create_window(455, 790, anchor=NW, window=self.distanceEntry)
-            self.resultLabel_window = self.canvas.create_window(1085, 760, anchor=NW, window=self.resultLabel)
+            self.resultLabel_window = self.canvas.create_window(1080, 760, anchor=NW, window=self.resultLabel)
 
             self.calculator = CalculateWork(self.root, self.resultLabel)
 
@@ -86,7 +86,7 @@ class Work():
             )
             self.canvas.create_window(149, 70, anchor=NW, window=backButton)
 
-            powerButton = Button(
+            workButton = Button(
                 root, image=self.power,
                 borderwidth=0,
                 background="#f4f4f7",
@@ -94,7 +94,7 @@ class Work():
                 cursor="hand2",
                 command=self.controller.open_calculator
             )
-            self.canvas.create_window(550, 158, anchor=NW, window=powerButton)
+            self.canvas.create_window(550, 158, anchor=NW, window=workButton)
 
             calculateButton = Button(
                 root, image=self.calculate,
@@ -102,7 +102,7 @@ class Work():
                 background="#ffffff",
                 activebackground="#ffffff",
                 cursor="hand2",
-                command=lambda: self.calculator.calculate(self.powerEntry, self.timeEntry)
+                command=lambda: self.calculator.calculate(self.angleEntry, self.forceEntry, self.distanceEntry)
             )
             self.canvas.create_window(435, 850, anchor=NW, window=calculateButton)
 
@@ -113,8 +113,9 @@ class Work():
                 activebackground="#ffffff",
                 cursor="hand2",
                 command=lambda: [
-                    self.powerEntry.delete(0, tk.END),
-                    self.timeEntry.delete(0, tk.END),
+                    self.angleEntry.delete(0, tk.END),
+                    self.forceEntry.delete(0, tk.END),
+                    self.distanceEntry.delete(0, tk.END),
                     self.resultLabel.config(text="")
                 ]
             )

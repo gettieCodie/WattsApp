@@ -9,7 +9,7 @@ sys.path.append(os.path.normpath(model_dir))
 from controller import AppController
 
 
-class EnergyStudyDashboard:
+class WorkStudyDashboard:
     def on_mousewheel(self, event):
         self.canvas.yview_scroll(-1 * (event.delta // 120), "units")  # Scroll by units
 
@@ -69,7 +69,7 @@ class EnergyStudyDashboard:
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
-            cursor="hand2",
+            cursor="hand2"
         )
         self.canvas.create_window(414, 556, anchor=NW, window=studyButton)
 
@@ -105,7 +105,7 @@ class EnergyStudyDashboard:
 
 def win():
     root = Tk()
-    EnergyStudyDashboard(root)
+    WorkStudyDashboard(root)
     root.mainloop()
 
 if __name__ == "__main__":

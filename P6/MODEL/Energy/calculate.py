@@ -33,21 +33,3 @@ class CalculateKineticEnergy:
             self.result_label.config(text=f"{KE:.2f} J")  # Update result label
         except ValueError:
             messagebox.showerror("Invalid Input", "Please enter numeric values for mass and velocity.")
-
-class CalculateTime:
-    def __init__(self, root, result_label):
-        self.root = root
-        self.result_label = result_label
-    
-    def calculate(self, work_entry, power_entry):
-        try:
-            work = float(work_entry.get())
-            power = float(power_entry.get())
-            if power == 0:
-                raise ZeroDivisionError("Power cannot be zero.")
-            time = work / power
-            self.result_label.config(text=f"{time:.2f} s")  # Update result label
-        except ValueError:
-            messagebox.showerror("Invalid Input", "Please enter numeric values for Work and Time.")
-        except ZeroDivisionError as e:
-            messagebox.showerror("Error", str(e))
