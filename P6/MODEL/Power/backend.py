@@ -2,6 +2,9 @@ import os
 import sys
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(current_dir, "Power"))
+sys.path.insert(0, os.path.join(current_dir, "Energy"))
+form_energy_dir = os.path.normpath(os.path.join(current_dir, "../../FORM/Energy"))
+sys.path.insert(0, form_energy_dir)
 
 
 class Problem_Set:
@@ -45,6 +48,18 @@ class Calculator:
         for widget in root.winfo_children():
             widget.pack_forget()
         Time(root)
+    
+    def launchKE(root):
+        from calcuKE import KineticEnergy
+        for widget in root.winfo_children():
+            widget.pack_forget()
+        KineticEnergy(root)
+    
+    def launchPE(root):
+        from calcuPE import PotentialEnergy
+        for widget in root.winfo_children():
+            widget.pack_forget()
+        PotentialEnergy(root)
 
     def back(root):
         from calcuDash import CalcuDashboard

@@ -3,17 +3,13 @@ import sys
 from tkinter import *
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.extend([
-    os.path.join(current_dir, "../../MODEL/Power"),
-    os.path.join(current_dir, "../../MODEL/Energy"),
-    os.path.join(current_dir, "../../MODEL/Work")
-])
+model_dir = os.path.join(current_dir, "../../MODEL/Power")
+sys.path.append(os.path.normpath(model_dir))
 form_dir = os.path.abspath(os.path.join(current_dir, '../../')) 
 sys.path.append(form_dir)
 
 from controller_power import AppControllerPower
-from controller_energy import AppControllerEnergy
-from controller_work import AppControllerWork
+
 #
 
 class StudyDashboard:
@@ -32,8 +28,6 @@ class StudyDashboard:
         self.root.title("Watt's App")
 
         self.Pcontroller = AppControllerPower(self.root)
-        self.Econtroller = AppControllerEnergy(self.root)
-        self.Wcontroller = AppControllerWork(self.root)
 
         # Create a canvas
         self.canvas = Canvas(root, width=1440, height=1024)
@@ -130,7 +124,7 @@ class StudyDashboard:
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            command=self.Pcontroller.open_studyDash
+            command=self.launch_PowerStudyDash
         )
         # Bind hover effects to masterButton
         powerButton.bind("<Enter>", lambda event: self.on_enter(event, powerButton, self.powerHover))
@@ -163,14 +157,26 @@ class StudyDashboard:
         workButton.bind("<Leave>", lambda event: self.on_leave(event, workButton, self.workTab))
         self.workButton_window = self.canvas.create_window(90, 390, anchor=NW, window=workButton)
 
+    def launch_PowerStudyDash(self):
+        from FORM.Power.studyView import StudyDashboard
+        from controller_power import AppControllerPower  # Ensure to use the Power controller
+        self.Pcontroller = AppControllerPower(self.root)  # Switch to Power controller
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+        StudyDashboard(self.root)
+
     def launch_EnergyStudyDash(self):
         from FORM.Energy.studyView import EnergyStudyDashboard
+        from controller_energy import AppControllerEnergy  # Ensure to use the Energy controller
+        self.Pcontroller = AppControllerEnergy(self.root)  # Switch to Energy controller
         for widget in self.root.winfo_children():
             widget.pack_forget()
         EnergyStudyDashboard(self.root)
     
     def launch_WorkStudyDash(self):
         from FORM.Work.studyView import WorkStudyDashboard
+        from controller_work import AppControllerWork  # Ensure to use the Work controller
+        self.Pcontroller = AppControllerWork(self.root)  # Switch to Work controller
         for widget in self.root.winfo_children():
             widget.pack_forget()
         WorkStudyDashboard(self.root)

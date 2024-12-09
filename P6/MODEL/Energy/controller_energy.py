@@ -14,7 +14,6 @@ class AppControllerEnergy:
         Master_Dashboard.back(self.root)
 
     def open_studyDash(self):
-        print("Energy Study Dashboard opened.")
         Study_Dashboard.launch(self.root)
 
     def back_studyDash(self):

@@ -28,6 +28,12 @@ class AppControllerPower:
     def open_calcuTime(self):
         Calculator.launchTime(self.root)
     
+    def open_calcuKE(self):
+        Calculator.launchKE(self.root)
+    
+    def open_calcuPE(self):
+        Calculator.launchPE(self.root)
+    
     def back_calcuDash(self):
         Calculator.back(self.root)
 

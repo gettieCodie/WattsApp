@@ -7,7 +7,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 model_dir = os.path.join(current_dir, "../../MODEL/Work")
 sys.path.append(os.path.normpath(model_dir))
 
-from controller import AppController
+from controller_work import AppControllerWork
 from calculate import CalculateWork
 from masterDash import MasterDashboard
 
@@ -20,7 +20,7 @@ class Work():
         self.root.geometry("1440x1024")
         self.root.title("Watt's App")
 
-        self.controller = AppController(self.root)
+        self.Wcontroller = AppControllerWork(self.root)
 
         # Create a canvas
         self.canvas = Canvas(root, width=1440, height=1024)
@@ -82,7 +82,7 @@ class Work():
                 background="#f4f4f7",
                 activebackground="#f4f4f7",
                 cursor="hand2",
-                command=self.controller.back_calcuDash
+                command=self.Wcontroller.back_calcuDash
             )
             self.canvas.create_window(149, 70, anchor=NW, window=backButton)
 
@@ -92,7 +92,7 @@ class Work():
                 background="#f4f4f7",
                 activebackground="#f4f4f7",
                 cursor="hand2",
-                command=self.controller.open_calculator
+                command=self.Wcontroller.open_calculator
             )
             self.canvas.create_window(550, 158, anchor=NW, window=workButton)
 

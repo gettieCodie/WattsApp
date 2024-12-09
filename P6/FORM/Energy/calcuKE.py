@@ -6,9 +6,12 @@ import sys
 current_dir = os.path.dirname(os.path.abspath(__file__))
 model_dir = os.path.join(current_dir, "../../MODEL/Energy")
 sys.path.append(os.path.normpath(model_dir))
+form_dir = os.path.abspath(os.path.join(current_dir, '../../')) 
+sys.path.append(form_dir)
+model_power_dir = os.path.join(current_dir, "../../MODEL/Power")
+sys.path.append(os.path.normpath(model_power_dir))
 
-from controller import AppController
-from calculate import CalculateKineticEnergy
+from controller_energy import AppControllerEnergy
 from masterDash import MasterDashboard
 
 class KineticEnergy():
@@ -16,11 +19,12 @@ class KineticEnergy():
         self.canvas.yview_scroll(-1 * (event.delta // 120), "units")  # Scroll by units
 
     def __init__(self, root):
+        from calculate import CalculateKineticEnergy
         self.root = root
         self.root.geometry("1440x1024")
         self.root.title("Watt's App")
 
-        self.controller = AppController(self.root)
+        self.Econtroller = AppControllerEnergy(self.root)
 
         # Create a canvas
         self.canvas = Canvas(root, width=1440, height=1024)
@@ -78,7 +82,7 @@ class KineticEnergy():
                 background="#f4f4f7",
                 activebackground="#f4f4f7",
                 cursor="hand2",
-                command=self.controller.back_calcuDash
+                command=self.Econtroller.back_calcuDash
             )
             self.canvas.create_window(149, 70, anchor=NW, window=backButton)
 
@@ -88,7 +92,7 @@ class KineticEnergy():
                 background="#f4f4f7",
                 activebackground="#f4f4f7",
                 cursor="hand2",
-                command=self.controller.open_calculatorKE
+                command=self.Econtroller.open_calculatorKE
             )
             self.canvas.create_window(295, 158, anchor=NW, window=keButton)
 
@@ -122,7 +126,7 @@ class KineticEnergy():
                 background="#f4f4f7",
                 activebackground="#f4f4f7",
                 cursor="hand2",
-                command=self.controller.open_calculatorPE
+                command=self.Econtroller.open_calculatorPE
             )
             self.canvas.create_window(760, 162, anchor=NW, window=peButton)
 

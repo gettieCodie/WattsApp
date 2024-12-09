@@ -5,26 +5,27 @@ import sys
 current_dir = os.path.dirname(os.path.abspath(__file__))
 model_dir = os.path.join(current_dir, "../../MODEL/Energy")
 sys.path.append(os.path.normpath(model_dir))
+form_dir = os.path.abspath(os.path.join(current_dir, '../../')) 
+sys.path.append(form_dir)
 
-from controller import AppController
+from controller_energy import AppControllerEnergy
 
 class ProblemSet:
     def on_mousewheel(self, event):
         self.canvas.yview_scroll(-1 * (event.delta // 120), "units")  # Scroll by units
-    
     
     def on_enter(self, event, button, hover_image):
         button.config(image=hover_image)
 
     def on_leave(self, event, button, original_image):
         button.config(image=original_image)
- 
+
     def __init__(self, root):
         self.root = root
         self.root.geometry("1440x1024")
         self.root.title("Watt's App")
 
-        self.controller = AppController(self.root)
+        self.Econtroller = AppControllerEnergy(self.root)
 
         # Create a canvas
         self.canvas = Canvas(root, width=1440, height=1024, bg = "#f4f4f7")
@@ -70,7 +71,7 @@ class ProblemSet:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.back_studyDash
+            command=self.Econtroller.back_studyDash
         )
         self.canvas.create_window(414, 35, anchor=NW, window=backButton)
         powerButton = Button(
@@ -79,7 +80,7 @@ class ProblemSet:
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.launch_PowerStudyDash
         )
         # Bind hover effects to masterButton
         powerButton.bind("<Enter>", lambda event: self.on_enter(event, powerButton, self.powerHover))
@@ -92,7 +93,7 @@ class ProblemSet:
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=launch_EnergyStudyDash
         )
         # Bind hover effects to masterButton
         energyButton.bind("<Enter>", lambda event: self.on_enter(event, energyButton, self.energyHover))
@@ -105,12 +106,37 @@ class ProblemSet:
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.launch_WorkStudyDash
         )
         # Bind hover effects to masterButton
         workButton.bind("<Enter>", lambda event: self.on_enter(event, workButton, self.workHover))
         workButton.bind("<Leave>", lambda event: self.on_leave(event, workButton, self.workTab))
         self.workButton_window = self.canvas.create_window(90, 390, anchor=NW, window=workButton)
+
+    def launch_PowerStudyDash(self):
+        from FORM.Power.studyView import StudyDashboard
+        from controller_power import AppControllerPower  # Ensure to use the Power controller
+        self.Pcontroller = AppControllerPower(self.root)  # Switch to Power controller
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+        StudyDashboard(self.root)
+
+    def launch_EnergyStudyDash(self):
+        from FORM.Energy.studyView import EnergyStudyDashboard
+        from controller_energy import AppControllerEnergy  # Ensure to use the Energy controller
+        self.Econtroller = AppControllerEnergy(self.root)  # Switch to Energy controller
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+        EnergyStudyDashboard(self.root)
+    
+    def launch_WorkStudyDash(self):
+        from FORM.Work.studyView import WorkStudyDashboard
+        from controller_work import AppControllerWork  # Ensure to use the Work controller
+        self.Wcontroller = AppControllerWork(self.root)  # Switch to Work controller
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+        WorkStudyDashboard(self.root)
+
 
 def win():
     root = Tk()

@@ -5,8 +5,10 @@ import sys
 current_dir = os.path.dirname(os.path.abspath(__file__))
 model_dir = os.path.join(current_dir, "../../MODEL/Energy")
 sys.path.append(os.path.normpath(model_dir))
+form_dir = os.path.abspath(os.path.join(current_dir, '../../')) 
+sys.path.append(form_dir)
 
-from controller import AppController
+from controller_energy import AppControllerEnergy
 
 
 class MasterDashboard():
@@ -25,7 +27,7 @@ class MasterDashboard():
         self.root.geometry("1440x1024")
         self.root.title("Watt's App")
 
-        self.controller = AppController(self.root)
+        self.Econtroller = AppControllerEnergy(self.root)
 
         # Create a canvas
         self.canvas = Canvas(root, width=1440, height=1024)
@@ -80,7 +82,7 @@ class MasterDashboard():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command= self.controller.open_studyDash
+            command= self.Econtroller.open_studyDash
         )
         self.canvas.create_window(414, 556, anchor=NW, window=studyButton)
 
@@ -99,7 +101,7 @@ class MasterDashboard():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.open_calculatorKE
+            command=self.Econtroller.open_calculatorKE
         )
         self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
 
@@ -109,7 +111,7 @@ class MasterDashboard():
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.controller.start_flashCard
+            command=self.Econtroller.start_flashCard
         )
 
         # Bind hover effects to masterButton
@@ -123,7 +125,7 @@ class MasterDashboard():
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.launch_PowerStudyDash
         )
         # Bind hover effects to masterButton
         powerButton.bind("<Enter>", lambda event: self.on_enter(event, powerButton, self.powerHover))
@@ -136,7 +138,7 @@ class MasterDashboard():
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.launch_EnergyStudyDash
         )
         # Bind hover effects to masterButton
         energyButton.bind("<Enter>", lambda event: self.on_enter(event, energyButton, self.energyHover))
@@ -149,12 +151,37 @@ class MasterDashboard():
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.launch_WorkStudyDash
         )
         # Bind hover effects to masterButton
         workButton.bind("<Enter>", lambda event: self.on_enter(event, workButton, self.workHover))
         workButton.bind("<Leave>", lambda event: self.on_leave(event, workButton, self.workTab))
         self.workButton_window = self.canvas.create_window(90, 390, anchor=NW, window=workButton)
+
+    def launch_PowerStudyDash(self):
+        from FORM.Power.studyView import StudyDashboard
+        from controller_power import AppControllerPower  # Ensure to use the Power controller
+        self.Pcontroller = AppControllerPower(self.root)  # Switch to Power controller
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+        StudyDashboard(self.root)
+
+    def launch_EnergyStudyDash(self):
+        from FORM.Energy.studyView import EnergyStudyDashboard
+        from controller_energy import AppControllerEnergy  # Ensure to use the Energy controller
+        self.Econtroller = AppControllerEnergy(self.root)  # Switch to Energy controller
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+        EnergyStudyDashboard(self.root)
+    
+    def launch_WorkStudyDash(self):
+        from FORM.Work.studyView import WorkStudyDashboard
+        from controller_work import AppControllerWork  # Ensure to use the Work controller
+        self.Wcontroller = AppControllerWork(self.root)  # Switch to Work controller
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+        WorkStudyDashboard(self.root)
+
 
 def win():
     root = Tk()
