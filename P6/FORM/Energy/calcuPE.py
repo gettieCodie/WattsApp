@@ -10,7 +10,7 @@ form_dir = os.path.abspath(os.path.join(current_dir, '../../'))
 sys.path.append(form_dir)
 
 from controller_energy import AppControllerEnergy
-from calculate import CalculatePotentialEnergy
+from calculate_energy import CalculatePotentialEnergy
 from masterDashE import MasterDashboard
 
 class PotentialEnergy():

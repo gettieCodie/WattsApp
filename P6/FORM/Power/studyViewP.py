@@ -10,8 +10,6 @@ sys.path.append(form_dir)
 
 from controller_power import AppControllerPower
 
-#
-
 class StudyDashboard:
     def on_mousewheel(self, event):
         self.canvas.yview_scroll(-1 * (event.delta // 120), "units")  # Scroll by units
@@ -168,7 +166,7 @@ class StudyDashboard:
     def launch_EnergyStudyDash(self):
         from FORM.Energy.studyViewE import EnergyStudyDashboard
         from controller_energy import AppControllerEnergy  # Ensure to use the Energy controller
-        self.Pcontroller = AppControllerEnergy(self.root)  # Switch to Energy controller
+        self.Econtroller = AppControllerEnergy(self.root)  # Switch to Energy controller
         for widget in self.root.winfo_children():
             widget.pack_forget()
         EnergyStudyDashboard(self.root)
@@ -176,11 +174,10 @@ class StudyDashboard:
     def launch_WorkStudyDash(self):
         from FORM.Work.studyViewW import WorkStudyDashboard
         from controller_work import AppControllerWork  # Ensure to use the Work controller
-        self.Pcontroller = AppControllerWork(self.root)  # Switch to Work controller
+        self.Wcontroller = AppControllerWork(self.root)  # Switch to Work controller
         for widget in self.root.winfo_children():
             widget.pack_forget()
         WorkStudyDashboard(self.root)
-
 
 def win():
     root = Tk()

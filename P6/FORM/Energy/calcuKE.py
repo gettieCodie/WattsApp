@@ -13,13 +13,13 @@ sys.path.append(os.path.normpath(model_power_dir))
 
 from controller_energy import AppControllerEnergy
 from masterDashE import MasterDashboard
+from calculate_energy import CalculateKineticEnergy
 
 class KineticEnergy():
     def on_mousewheel(self, event):
         self.canvas.yview_scroll(-1 * (event.delta // 120), "units")  # Scroll by units
 
     def __init__(self, root):
-        from calculate import CalculateKineticEnergy
         self.root = root
         self.root.geometry("1440x1024")
         self.root.title("Watt's App")

@@ -1,8 +1,8 @@
 import os
 import sys
 current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(current_dir, "Work"))
-
+model_work_dir = os.path.join(current_dir, "Work")
+sys.path.insert(0, os.path.normpath(model_work_dir))
 
 class Problem_Set_Work:
     @staticmethod

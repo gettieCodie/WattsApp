@@ -93,7 +93,7 @@ class ProblemSet:
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            command=launch_EnergyStudyDash
+            command=self.launch_EnergyStudyDash
         )
         # Bind hover effects to masterButton
         energyButton.bind("<Enter>", lambda event: self.on_enter(event, energyButton, self.energyHover))
@@ -114,7 +114,7 @@ class ProblemSet:
         self.workButton_window = self.canvas.create_window(90, 390, anchor=NW, window=workButton)
 
     def launch_PowerStudyDash(self):
-        from FORM.Power.studyView import StudyDashboard
+        from FORM.Power.studyViewP import StudyDashboard
         from controller_power import AppControllerPower  # Ensure to use the Power controller
         self.Pcontroller = AppControllerPower(self.root)  # Switch to Power controller
         for widget in self.root.winfo_children():
@@ -122,7 +122,7 @@ class ProblemSet:
         StudyDashboard(self.root)
 
     def launch_EnergyStudyDash(self):
-        from FORM.Energy.studyView import EnergyStudyDashboard
+        from FORM.Energy.studyViewE import EnergyStudyDashboard
         from controller_energy import AppControllerEnergy  # Ensure to use the Energy controller
         self.Econtroller = AppControllerEnergy(self.root)  # Switch to Energy controller
         for widget in self.root.winfo_children():
@@ -130,7 +130,7 @@ class ProblemSet:
         EnergyStudyDashboard(self.root)
     
     def launch_WorkStudyDash(self):
-        from FORM.Work.studyView import WorkStudyDashboard
+        from FORM.Work.studyViewW import WorkStudyDashboard
         from controller_work import AppControllerWork  # Ensure to use the Work controller
         self.Wcontroller = AppControllerWork(self.root)  # Switch to Work controller
         for widget in self.root.winfo_children():

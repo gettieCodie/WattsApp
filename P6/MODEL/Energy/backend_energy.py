@@ -15,7 +15,7 @@ class Problem_Set_Energy:
 class Master_Dashboard_Energy:
     @staticmethod
     def launch(root):
-        from masterDasheE import MasterDashboard
+        from masterDashE import MasterDashboard
         for widget in root.winfo_children():
             widget.pack_forget()
         MasterDashboard(root)

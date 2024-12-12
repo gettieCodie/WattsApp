@@ -14,7 +14,6 @@ class AppControllerWork:
         Master_Dashboard_Work.back(self.root)
 
     def open_studyDash(self):
-        print("Work Study Dashboard opened.")
         Study_Dashboard_Work.launch(self.root)
 
     def back_studyDash(self):
