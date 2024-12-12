@@ -1,7 +1,13 @@
 import os
 import sys
 current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(current_dir, "Power"))
 sys.path.insert(0, os.path.join(current_dir, "Energy"))
+sys.path.insert(0, os.path.join(current_dir, "Work"))
+form_energy_dir = os.path.normpath(os.path.join(current_dir, "../../FORM/Energy"))
+form_work_dir = os.path.normpath(os.path.join(current_dir, "../../FORM/Work"))
+sys.path.insert(0, form_energy_dir)
+sys.path.insert(0, form_work_dir)
 
 
 class Problem_Set_Energy:

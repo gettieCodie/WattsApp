@@ -110,7 +110,7 @@ class CalcuDashboard():
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.launch_PowerStudyDash
         )
         # Bind hover effects to masterButton
         powerButton.bind("<Enter>", lambda event: self.on_enter(event, powerButton, self.powerHover))
@@ -123,7 +123,7 @@ class CalcuDashboard():
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.launch_EnergyStudyDash
         )
         # Bind hover effects to masterButton
         energyButton.bind("<Enter>", lambda event: self.on_enter(event, energyButton, self.energyHover))
@@ -136,12 +136,36 @@ class CalcuDashboard():
             background="#ffffff",
             activebackground="#ffffff",
             cursor="hand2",
-            # command=self.controller.open_problemSet
+            command=self.launch_WorkStudyDash
         )
         # Bind hover effects to masterButton
         workButton.bind("<Enter>", lambda event: self.on_enter(event, workButton, self.workHover))
         workButton.bind("<Leave>", lambda event: self.on_leave(event, workButton, self.workTab))
         self.workButton_window = self.canvas.create_window(90, 390, anchor=NW, window=workButton)
+
+    def launch_PowerStudyDash(self):
+        from FORM.Power.studyViewP import StudyDashboard
+        from controller_power import AppControllerPower  # Ensure to use the Power controller
+        self.Pcontroller = AppControllerPower(self.root)  # Switch to Power controller
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+        StudyDashboard(self.root)
+
+    def launch_EnergyStudyDash(self):
+        from FORM.Energy.studyViewE import EnergyStudyDashboard
+        from controller_energy import AppControllerEnergy  # Ensure to use the Energy controller
+        self.Econtroller = AppControllerEnergy(self.root)  # Switch to Energy controller
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+        EnergyStudyDashboard(self.root)
+    
+    def launch_WorkStudyDash(self):
+        from FORM.Work.studyViewW import WorkStudyDashboard
+        from controller_work import AppControllerWork  # Ensure to use the Work controller
+        self.Wcontroller = AppControllerWork(self.root)  # Switch to Work controller
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+        WorkStudyDashboard(self.root)
 
 
 def win():
