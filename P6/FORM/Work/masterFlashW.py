@@ -1,5 +1,5 @@
 from tkinter import *
-from masterDash import MasterDashboard
+from masterDashW import MasterDashboard
 
 class FlashDash():
     def on_mousewheel(self, event):

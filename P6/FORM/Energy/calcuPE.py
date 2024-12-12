@@ -11,7 +11,7 @@ sys.path.append(form_dir)
 
 from controller_energy import AppControllerEnergy
 from calculate import CalculatePotentialEnergy
-from masterDash import MasterDashboard
+from masterDashE import MasterDashboard
 
 class PotentialEnergy():
     def on_mousewheel(self, event):

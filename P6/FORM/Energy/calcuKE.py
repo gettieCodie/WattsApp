@@ -12,7 +12,7 @@ model_power_dir = os.path.join(current_dir, "../../MODEL/Power")
 sys.path.append(os.path.normpath(model_power_dir))
 
 from controller_energy import AppControllerEnergy
-from masterDash import MasterDashboard
+from masterDashE import MasterDashboard
 
 class KineticEnergy():
     def on_mousewheel(self, event):

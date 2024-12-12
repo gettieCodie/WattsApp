@@ -1,18 +1,15 @@
+from tkinter import *
 import os
 import sys
-from tkinter import *
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-model_dir = os.path.join(current_dir, "../../MODEL/Power")
+model_dir = os.path.join(current_dir, "../../MODEL/Work")
 sys.path.append(os.path.normpath(model_dir))
-form_dir = os.path.abspath(os.path.join(current_dir, '../../')) 
-sys.path.append(form_dir)
 
-from controller_power import AppControllerPower
+from controller_work import AppControllerWork
 
-#
 
-class StudyDashboard:
+class MasterDashboard():
     def on_mousewheel(self, event):
         self.canvas.yview_scroll(-1 * (event.delta // 120), "units")  # Scroll by units
 
@@ -22,12 +19,13 @@ class StudyDashboard:
     def on_leave(self, event, button, original_image):
         button.config(image=original_image)
     
+    
     def __init__(self, root):
         self.root = root
         self.root.geometry("1440x1024")
         self.root.title("Watt's App")
 
-        self.Pcontroller = AppControllerPower(self.root)
+        self.Wcontroller = AppControllerWork(self.root)
 
         # Create a canvas
         self.canvas = Canvas(root, width=1440, height=1024)
@@ -44,20 +42,20 @@ class StudyDashboard:
         # Load images
         try:
             # Store image references as instance variables
-            self.studySelected = PhotoImage(file="DASH/study.png")
-            self.bg = PhotoImage(file="trace/BG.png")
+            self.bg = PhotoImage(file="trace/MASTER.png")
+            self.bg = PhotoImage(file="UTILITY/BGhalf.png")
             self.tab = PhotoImage(file="UTILITY/tab.png")
-            self.greeting = PhotoImage(file="DASH/greeting.png")
-            self.tagline = PhotoImage(file="DASH/TAGLINE.png")
-            self.know = PhotoImage(file="DASH/know.png")
-            self.definitions = PhotoImage(file="DASH/definitions.png")
-            self.formula = PhotoImage(file="DASH/formula.png")
-            self.problem = PhotoImage(file="DASH/problem.png")
-            self.master_img = PhotoImage(file="DASH/master.png")
-            self.calcu = PhotoImage(file="DASH/calcu.png")
-            self.powerTab = PhotoImage(file="UTILITY/powerS.png")
+            self.greeting = PhotoImage(file="AssetsWork/greeting.png")
+            self.tagline = PhotoImage(file="AssetsWork/tagline.png")
+            self.know = PhotoImage(file="AssetsWork/kmWork.png")
+            self.study = PhotoImage(file="AssetsWork/study.png")
+            self.masterSelected = PhotoImage(file="AssetsWork/masterS.png")
+            self.calcu = PhotoImage(file="AssetsWork/calcu.png")
+            self.flashDef = PhotoImage(file="AssetsWork/def.png")
+            self.flash_hover = PhotoImage(file="AssetsWork/hover1.png")
+            self.powerTab = PhotoImage(file="UTILITY/powerr.png")
             self.energyTab = PhotoImage(file="UTILITY/energy.png")
-            self.workTab = PhotoImage(file="UTILITY/work.png")
+            self.workTab = PhotoImage(file="UTILITY/workS.png")
             self.powerHover = PhotoImage(file="UTILITY/powerS.png")
             self.energyHover = PhotoImage(file="UTILITY/energyS.png")
             self.workHover = PhotoImage(file="UTILITY/workS.png")
@@ -68,10 +66,7 @@ class StudyDashboard:
             self.greetingID = self.canvas.create_image(414, 66, anchor=NW, image=self.greeting)
             self.taglineID = self.canvas.create_image(332, 67, anchor=NW, image=self.tagline)
             self.knowID = self.canvas.create_image(414, 502, anchor=NW, image=self.know)
-            self.definitionsID = self.canvas.create_image(414, 880, anchor=NW, image=self.definitions)
-            self.formulaID = self.canvas.create_image(414, 1508, anchor=NW, image=self.formula)
-            self.problemID = self.canvas.create_image(1026, 1820, anchor=NW, image=self.problem)
-
+            
         except Exception as e:
             print(f"Error loading image: {e}")
 
@@ -80,23 +75,23 @@ class StudyDashboard:
 
         # Create buttons
         studyButton = Button(
-            root, image=self.studySelected,
+            root, image=self.study,
+            borderwidth=0,
+            background="#f4f4f7",
+            activebackground="#f4f4f7",
+            cursor="hand2",
+            command= self.Wcontroller.open_studyDash
+        )
+        self.canvas.create_window(414, 556, anchor=NW, window=studyButton)
+
+        masterButton = Button(
+            root, image=self.masterSelected,
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2"
         )
-        self.canvas.create_window(414, 556, anchor=NW, window=studyButton)
-
-        masterButton = Button(
-            root, image=self.master_img,
-            borderwidth=0,
-            background="#f4f4f7",
-            activebackground="#f4f4f7",
-            cursor="hand2",
-            command=self.Pcontroller.open_masterDash
-        )
-        self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
+        self.masterButton_window = self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
 
         calcuButton = Button(
             root, image=self.calcu,
@@ -104,19 +99,24 @@ class StudyDashboard:
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.Pcontroller.open_calculator
+            command=self.Wcontroller.open_calculator
         )
         self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
 
-        problemButton = Button(
-            root, image=self.problem,
+        flashDefButton = Button(
+            root, image=self.flashDef,
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.Pcontroller.open_problemSet
+            command=self.Wcontroller.start_flashCard
         )
-        self.canvas.create_window(1026, 1820, anchor=NW, window=problemButton)
+
+        # Bind hover effects to masterButton
+        flashDefButton.bind("<Enter>", lambda event: self.on_enter(event, flashDefButton, self.flash_hover))
+        flashDefButton.bind("<Leave>", lambda event: self.on_leave(event, flashDefButton, self.flashDef))
+
+        self.flashDefButton_window = self.canvas.create_window(710, 868, anchor=NW, window=flashDefButton)
 
         powerButton = Button(
             root, image=self.powerTab,
@@ -129,7 +129,7 @@ class StudyDashboard:
         # Bind hover effects to masterButton
         powerButton.bind("<Enter>", lambda event: self.on_enter(event, powerButton, self.powerHover))
         powerButton.bind("<Leave>", lambda event: self.on_leave(event, powerButton, self.powerTab))
-        self.canvas.create_window(90, 230, anchor=NW, window=powerButton)
+        self.powerButton_window = self.canvas.create_window(90, 230, anchor=NW, window=powerButton)
 
         energyButton = Button(
             root, image=self.energyTab,
@@ -142,7 +142,7 @@ class StudyDashboard:
         # Bind hover effects to masterButton
         energyButton.bind("<Enter>", lambda event: self.on_enter(event, energyButton, self.energyHover))
         energyButton.bind("<Leave>", lambda event: self.on_leave(event, energyButton, self.energyTab))
-        self.canvas.create_window(90, 310, anchor=NW, window=energyButton)
+        self.energyButton_window = self.canvas.create_window(90, 310, anchor=NW, window=energyButton)
 
         workButton = Button(
             root, image=self.workTab,
@@ -158,7 +158,7 @@ class StudyDashboard:
         self.workButton_window = self.canvas.create_window(90, 390, anchor=NW, window=workButton)
 
     def launch_PowerStudyDash(self):
-        from FORM.Power.studyView import StudyDashboard
+        from FORM.Power.studyViewP import StudyDashboard
         from controller_power import AppControllerPower  # Ensure to use the Power controller
         self.Pcontroller = AppControllerPower(self.root)  # Switch to Power controller
         for widget in self.root.winfo_children():
@@ -166,25 +166,24 @@ class StudyDashboard:
         StudyDashboard(self.root)
 
     def launch_EnergyStudyDash(self):
-        from FORM.Energy.studyView import EnergyStudyDashboard
+        from FORM.Energy.studyViewE import EnergyStudyDashboard
         from controller_energy import AppControllerEnergy  # Ensure to use the Energy controller
-        self.Pcontroller = AppControllerEnergy(self.root)  # Switch to Energy controller
+        self.Econtroller = AppControllerEnergy(self.root)  # Switch to Energy controller
         for widget in self.root.winfo_children():
             widget.pack_forget()
         EnergyStudyDashboard(self.root)
     
     def launch_WorkStudyDash(self):
-        from FORM.Work.studyView import WorkStudyDashboard
+        from FORM.Work.studyViewW import WorkStudyDashboard
         from controller_work import AppControllerWork  # Ensure to use the Work controller
-        self.Pcontroller = AppControllerWork(self.root)  # Switch to Work controller
+        self.Wcontroller = AppControllerWork(self.root)  # Switch to Work controller
         for widget in self.root.winfo_children():
             widget.pack_forget()
         WorkStudyDashboard(self.root)
 
-
 def win():
     root = Tk()
-    StudyDashboard(root)
+    MasterDashboard(root)
     root.mainloop()
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
-from tkinter import *
 import os
 import sys
+from tkinter import *
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 model_dir = os.path.join(current_dir, "../../MODEL/Work")
@@ -10,16 +10,16 @@ sys.path.append(form_dir)
 
 from controller_work import AppControllerWork
 
-class ProblemSet:
+class WorkStudyDashboard:
     def on_mousewheel(self, event):
         self.canvas.yview_scroll(-1 * (event.delta // 120), "units")  # Scroll by units
-    
+
     def on_enter(self, event, button, hover_image):
         button.config(image=hover_image)
 
     def on_leave(self, event, button, original_image):
         button.config(image=original_image)
-
+    
     def __init__(self, root):
         self.root = root
         self.root.geometry("1440x1024")
@@ -42,42 +42,80 @@ class ProblemSet:
         # Load images
         try:
             # Store image references as instance variables
+            self.studySelected = PhotoImage(file="AssetsWork/studyS.png")
             self.bg = PhotoImage(file="trace/BG.png")
             self.tab = PhotoImage(file="UTILITY/tab.png")
-            self.prob1 = PhotoImage(file="AssetsWork/1.png")
-            self.prob2 = PhotoImage(file="AssetsWork/2.png")
-            self.back = PhotoImage(file="UTILITY/backDash.png")
+            self.greeting = PhotoImage(file="AssetsWork/greeting.png")
+            self.tagline = PhotoImage(file="AssetsWork/tagline.png")
+            self.know = PhotoImage(file="AssetsWork/kmWork.png")
+            self.definitions = PhotoImage(file="AssetsWork/definitions.png")
+            self.formula = PhotoImage(file="AssetsWork/formula.png")
+            self.problem = PhotoImage(file="AssetsWork/probsetButton.png")
+            self.master_img = PhotoImage(file="AssetsWork/master.png")
+            self.calcu = PhotoImage(file="AssetsWork/calcu.png")
             self.powerTab = PhotoImage(file="UTILITY/powerr.png")
             self.energyTab = PhotoImage(file="UTILITY/energy.png")
             self.workTab = PhotoImage(file="UTILITY/workS.png")
             self.powerHover = PhotoImage(file="UTILITY/powerS.png")
             self.energyHover = PhotoImage(file="UTILITY/energyS.png")
             self.workHover = PhotoImage(file="UTILITY/workS.png")
-            
 
             # Create images on the canvas
             self.canvas_image = self.canvas.create_image(0, 0, anchor=NW, image=self.bg)
             self.tabID = self.canvas.create_image(52, 35, anchor=NW, image=self.tab)
-            self.prob1ID = self.canvas.create_image(414, 140, anchor=NW, image=self.prob1)
-            self.prob2ID = self.canvas.create_image(414, 910, anchor=NW, image=self.prob2)
-            
+            self.greetingID = self.canvas.create_image(414, 66, anchor=NW, image=self.greeting)
+            self.taglineID = self.canvas.create_image(332, 67, anchor=NW, image=self.tagline)
+            self.knowID = self.canvas.create_image(414, 502, anchor=NW, image=self.know)
+            self.definitionsID = self.canvas.create_image(414, 880, anchor=NW, image=self.definitions)
+            self.formulaID = self.canvas.create_image(414, 1508, anchor=NW, image=self.formula)
+            # self.problemID = self.canvas.create_image(1026, 1820, anchor=NW, image=self.problem)
+
         except Exception as e:
             print(f"Error loading image: {e}")
 
         # Configure the scroll region to match the image height
         self.canvas.config(scrollregion=self.canvas.bbox(ALL))
 
-        
-        backButton = Button(
-            root, image=self.back,
+        # Create buttons
+        studyButton = Button(
+            root, image=self.studySelected,
+            borderwidth=0,
+            background="#f4f4f7",
+            activebackground="#f4f4f7",
+            cursor="hand2"
+        )
+        self.canvas.create_window(414, 556, anchor=NW, window=studyButton)
+
+        masterButton = Button(
+            root, image=self.master_img,
             borderwidth=0,
             background="#f4f4f7",
             activebackground="#f4f4f7",
             cursor="hand2",
-            command=self.Wcontroller.back_studyDash
+            command=self.Wcontroller.open_masterDash
         )
-        self.canvas.create_window(414, 35, anchor=NW, window=backButton)
-        
+        self.canvas.create_window(750, 556, anchor=NW, window=masterButton)
+
+        calcuButton = Button(
+            root, image=self.calcu,
+            borderwidth=0,
+            background="#f4f4f7",
+            activebackground="#f4f4f7",
+            cursor="hand2",
+            command=self.Wcontroller.open_calculator
+        )
+        self.canvas.create_window(1085, 556, anchor=NW, window=calcuButton)
+
+        problemButton = Button(
+            root, image=self.problem,
+            borderwidth=0,
+            background="#f4f4f7",
+            activebackground="#f4f4f7",
+            cursor="hand2",
+            command=self.Wcontroller.open_problemSet
+        )
+        self.canvas.create_window(1026, 1820, anchor=NW, window=problemButton)
+
         powerButton = Button(
             root, image=self.powerTab,
             borderwidth=0,
@@ -118,7 +156,7 @@ class ProblemSet:
         self.workButton_window = self.canvas.create_window(90, 390, anchor=NW, window=workButton)
 
     def launch_PowerStudyDash(self):
-        from FORM.Power.studyView import StudyDashboard
+        from FORM.Power.studyViewP import StudyDashboard
         from controller_power import AppControllerPower  # Ensure to use the Power controller
         self.Pcontroller = AppControllerPower(self.root)  # Switch to Power controller
         for widget in self.root.winfo_children():
@@ -126,7 +164,7 @@ class ProblemSet:
         StudyDashboard(self.root)
 
     def launch_EnergyStudyDash(self):
-        from FORM.Energy.studyView import EnergyStudyDashboard
+        from FORM.Energy.studyViewE import EnergyStudyDashboard
         from controller_energy import AppControllerEnergy  # Ensure to use the Energy controller
         self.Econtroller = AppControllerEnergy(self.root)  # Switch to Energy controller
         for widget in self.root.winfo_children():
@@ -134,7 +172,7 @@ class ProblemSet:
         EnergyStudyDashboard(self.root)
     
     def launch_WorkStudyDash(self):
-        from FORM.Work.studyView import WorkStudyDashboard
+        from FORM.Work.studyViewW import WorkStudyDashboard
         from controller_work import AppControllerWork  # Ensure to use the Work controller
         self.Wcontroller = AppControllerWork(self.root)  # Switch to Work controller
         for widget in self.root.winfo_children():
@@ -143,7 +181,7 @@ class ProblemSet:
 
 def win():
     root = Tk()
-    ProblemSet(root)
+    WorkStudyDashboard(root)
     root.mainloop()
 
 if __name__ == "__main__":

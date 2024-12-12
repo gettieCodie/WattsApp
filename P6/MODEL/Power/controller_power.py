@@ -1,42 +1,42 @@
-from backend import *
+from backend_power import *
 
 class AppControllerPower:
     def __init__(self, root):
         self.root = root
     
     def open_problemSet(self):
-        Problem_Set.launch(self.root)
+        Problem_Set_Power.launch(self.root)
     
     def open_masterDash(self):
-        Master_Dashboard.launch(self.root)
+        Master_Dashboard_Power.launch(self.root)
     
     def back_masterDash(self):
-        Master_Dashboard.back(self.root)
+        Master_Dashboard_Power.back(self.root)
 
     def open_studyDash(self):
-        Study_Dashboard.launch(self.root)
+        Study_Dashboard_Power.launch(self.root)
 
     def back_studyDash(self):
-        Study_Dashboard.back(self.root)
+        Study_Dashboard_Power.back(self.root)
 
     def open_calculator(self):
-        Calculator.launchPower(self.root)
+        Calculator_Power.launchPower(self.root)
     
     def open_calcuWork(self):
-        Calculator.launchWork(self.root)
+        Calculator_Power.launchWork(self.root)
     
     def open_calcuTime(self):
-        Calculator.launchTime(self.root)
+        Calculator_Power.launchTime(self.root)
     
     def open_calcuKE(self):
-        Calculator.launchKE(self.root)
+        Calculator_Power.launchKE(self.root)
     
     def open_calcuPE(self):
-        Calculator.launchPE(self.root)
+        Calculator_Power.launchPE(self.root)
     
     def back_calcuDash(self):
-        Calculator.back(self.root)
+        Calculator_Power.back(self.root)
 
     def start_flashCard(self):
-        FlashCards.launch(self.root)
+        FlashCards_Power.launch(self.root)
     

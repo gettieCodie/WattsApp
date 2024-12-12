@@ -1,76 +1,69 @@
 import os
 import sys
 current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(current_dir, "Energy"))
+sys.path.insert(0, os.path.join(current_dir, "Work"))
 
 
-class Problem_Set:
+class Problem_Set_Work:
     @staticmethod
     def launch(root):
-        from probSet import ProblemSet
+        from probSetW import ProblemSet
         for widget in root.winfo_children():
             widget.pack_forget()
         ProblemSet(root)
 
-class Master_Dashboard:
+class Master_Dashboard_Work:
     @staticmethod
     def launch(root):
-        from masterDash import MasterDashboard
+        from masterDashW import MasterDashboard
         for widget in root.winfo_children():
             widget.pack_forget()
         MasterDashboard(root)
     
     def back(root):
-        from masterDash import MasterDashboard
+        from masterDashW import MasterDashboard
         for widget in root.winfo_children():
             widget.pack_forget()
         MasterDashboard(root)
 
-class Calculator:
+class Calculator_Work:
     @staticmethod
-    def launchKE(root):
-        from calcuKE import KineticEnergy
+    def launchWork(root):
+        from calcuWorkW import Work
         for widget in root.winfo_children():
             widget.pack_forget()
-        KineticEnergy(root)
-
-    def launchPE(root):
-        from calcuPE import PotentialEnergy
-        for widget in root.winfo_children():
-            widget.pack_forget()
-        PotentialEnergy(root)
+        Work(root)
     
     def launch(root):
-        from calcuDash import CalcuDashboard
+        from calcuDashW import CalcuDashboard
         for widget in root.winfo_children():
             widget.pack_forget()
         CalcuDashboard(root)
 
     def back(root):
-        from calcuDash import CalcuDashboard
+        from calcuDashW import CalcuDashboard
         for widget in root.winfo_children():
             widget.pack_forget()
         CalcuDashboard(root)
 
-class Study_Dashboard: 
+class Study_Dashboard_Work: 
     @staticmethod
     def back(root):
-        from studyView import EnergyStudyDashboard
+        from studyViewW import WorkStudyDashboard
         for widget in root.winfo_children():
             widget.pack_forget()
-        EnergyStudyDashboard(root)
+        WorkStudyDashboard(root)
     
     def launch(root):
-        from studyView import EnergyStudyDashboard
-        print("Energy Study Dashboard opened.")
+        from studyViewW import WorkStudyDashboard
         for widget in root.winfo_children():
             widget.pack_forget()
-        EnergyStudyDashboard(root)
+        WorkStudyDashboard(root)
 
-class FlashCards:
+class FlashCards_Work:
     @staticmethod
     def launch(root):
-        from masterFlash import FlashDash
+        from masterFlashW import FlashDash
         for widget in root.winfo_children():
             widget.pack_forget()
         FlashDash(root)

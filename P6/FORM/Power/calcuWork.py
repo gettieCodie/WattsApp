@@ -9,7 +9,7 @@ sys.path.append(os.path.normpath(model_dir))
 
 from controller_power import AppControllerPower
 from calculate import CalculateWork
-from masterDash import MasterDashboard
+from masterDashP import MasterDashboard
 
 class Work():
     def on_mousewheel(self, event):
