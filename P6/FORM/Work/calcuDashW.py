@@ -23,7 +23,8 @@ class CalcuDashboard():
     def __init__(self, root):
         self.root = root
         self.root.geometry("1440x1024")
-        self.root.title("Watt's App")
+        self.root.title("Watt's Up")
+        self.root.iconbitmap("UTILITY/bolt.ico")
 
         self.Wcontroller = AppControllerWork(self.root)
 
@@ -44,7 +45,7 @@ class CalcuDashboard():
             # Store image references as instance variables
             self.bg = PhotoImage(file="trace/MASTER.png")
             self.bg = PhotoImage(file="UTILITY/BGhalf.png")
-            self.tab = PhotoImage(file="UTILITY/tab.png")
+            self.tab = PhotoImage(file="UTILITY/tabW.png")
             self.greeting = PhotoImage(file="AssetsWork/greeting.png")
             self.tagline = PhotoImage(file="AssetsWork/tagline.png")
             self.know = PhotoImage(file="AssetsWork/kmWork.png")

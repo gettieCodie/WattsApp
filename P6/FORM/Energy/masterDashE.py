@@ -25,7 +25,8 @@ class MasterDashboard():
     def __init__(self, root):
         self.root = root
         self.root.geometry("1440x1024")
-        self.root.title("Watt's App")
+        self.root.title("Watt's Up")
+        self.root.iconbitmap("UTILITY/bolt.ico")
 
         self.Econtroller = AppControllerEnergy(self.root)
 
@@ -46,7 +47,7 @@ class MasterDashboard():
             # Store image references as instance variables
             self.bg = PhotoImage(file="trace/MASTER.png")
             self.bg = PhotoImage(file="UTILITY/BGhalf.png")
-            self.tab = PhotoImage(file="UTILITY/tab.png")
+            self.tab = PhotoImage(file="UTILITY/tabE.png")
             self.greeting = PhotoImage(file="AssetsEnergy/greeting.png")
             self.tagline = PhotoImage(file="AssetsEnergy/tagline.png")
             self.know = PhotoImage(file="AssetsEnergy/kmPower.png")

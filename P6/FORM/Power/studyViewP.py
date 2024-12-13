@@ -23,7 +23,8 @@ class StudyDashboard:
     def __init__(self, root):
         self.root = root
         self.root.geometry("1440x1024")
-        self.root.title("Watt's App")
+        self.root.title("Watt's Up")
+        self.root.iconbitmap("UTILITY/bolt.ico")
 
         self.Pcontroller = AppControllerPower(self.root)
 
@@ -59,8 +60,10 @@ class StudyDashboard:
             self.powerHover = PhotoImage(file="UTILITY/powerS.png")
             self.energyHover = PhotoImage(file="UTILITY/energyS.png")
             self.workHover = PhotoImage(file="UTILITY/workS.png")
+            # self.logoPower = PhotoImage(file="DASH/logo.png")
 
             # Create images on the canvas
+            
             self.canvas_image = self.canvas.create_image(0, 0, anchor=NW, image=self.bg)
             self.tabID = self.canvas.create_image(52, 35, anchor=NW, image=self.tab)
             self.greetingID = self.canvas.create_image(414, 66, anchor=NW, image=self.greeting)
@@ -69,7 +72,8 @@ class StudyDashboard:
             self.definitionsID = self.canvas.create_image(414, 880, anchor=NW, image=self.definitions)
             self.formulaID = self.canvas.create_image(414, 1508, anchor=NW, image=self.formula)
             self.problemID = self.canvas.create_image(1026, 1820, anchor=NW, image=self.problem)
-
+            # self.logoPowerID = self.canvas.create_image(0,0, anchor = NW, image=self.logoPower)
+            self.canvas.tag_raise(self.logoPowerID, self.tabID)
         except Exception as e:
             print(f"Error loading image: {e}")
 

@@ -23,8 +23,8 @@ class ProblemSet:
     def __init__(self, root):
         self.root = root
         self.root.geometry("1440x1024")
-        self.root.title("Watt's App")
-
+        self.root.title("Watt's Up")
+        self.root.iconbitmap("UTILITY/bolt.ico")
         self.Econtroller = AppControllerEnergy(self.root)
 
         # Create a canvas
@@ -43,7 +43,7 @@ class ProblemSet:
         try:
             # Store image references as instance variables
             self.bg = PhotoImage(file="trace/BG.png")
-            self.tab = PhotoImage(file="UTILITY/tab.png")
+            self.tab = PhotoImage(file="UTILITY/tabE.png")
             self.prob1 = PhotoImage(file="AssetsEnergy/probset1.png")
             self.prob2 = PhotoImage(file="AssetsEnergy/probset2.png")
             self.back = PhotoImage(file="UTILITY/backDash.png")

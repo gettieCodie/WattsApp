@@ -18,7 +18,8 @@ class Work():
     def __init__(self, root):
         self.root = root
         self.root.geometry("1440x1024")
-        self.root.title("Watt's App")
+        self.root.title("Watt's Up")
+        self.root.iconbitmap("UTILITY/bolt.ico")
 
         self.Wcontroller = AppControllerWork(self.root)
 
