@@ -8,7 +8,7 @@ model_dir = os.path.join(current_dir, "../../MODEL/Work")
 sys.path.append(os.path.normpath(model_dir))
 
 from controller_work import AppControllerWork
-from calculate import CalculateWork
+from calculate_work import Calculate_Work
 from masterDashW import MasterDashboard
 
 class Work():
@@ -73,7 +73,7 @@ class Work():
             self.distanceEntry_window = self.canvas.create_window(455, 790, anchor=NW, window=self.distanceEntry)
             self.resultLabel_window = self.canvas.create_window(1080, 760, anchor=NW, window=self.resultLabel)
 
-            self.calculator = CalculateWork(self.root, self.resultLabel)
+            self.calculator = Calculate_Work(self.root, self.resultLabel)
 
             #Buttons---------------------------------------
             backButton = Button(

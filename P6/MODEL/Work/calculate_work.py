@@ -1,16 +1,16 @@
 import math
 from tkinter import messagebox
 
-class CalculateWork:
+class Calculate_Work:
     def __init__(self, root, result_label):
         self.root = root
         self.result_label = result_label
 
-    def calculate(self, angle, force, distance):
+    def calculate(self, angle_entry, force_entry, distance_entry):
         try:
-            force = float(force.get())
-            distance = float(distance.get())
-            angle_input = angle.get().strip()
+            force = float(force_entry.get())
+            distance = float(distance_entry.get())
+            angle_input = angle_entry.get().strip()
 
             if angle_input == "":
                 angle = 0.0
